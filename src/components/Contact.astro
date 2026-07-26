@@ -1,0 +1,25 @@
+---
+import { contactIntro, email } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section id="contacto">
+  <div class="mx-auto max-w-[1180px] px-6 pt-24 pb-28 sm:px-8">
+    <SectionHeading label="Contacto" />
+
+    <div class="mt-12">
+      <p class="max-w-[40ch] text-lg text-graphite">{contactIntro}</p>
+
+      {/* Una sola acción principal, al tamaño que le corresponde. */}
+      <a
+        href={`mailto:${email}`}
+        class="mt-8 inline-block max-w-full break-words text-[clamp(28px,5.2vw,64px)] font-medium tracking-tight text-ink decoration-link decoration-[3px] underline-offset-[10px] transition-colors hover:text-link hover:underline"
+      >
+        {email}
+      </a>
+
+      {/* Las redes no se repiten aquí: ya están en el riel del hero y en el
+          pie. Esta sección se queda con una sola acción. */}
+    </div>
+  </div>
+</section>

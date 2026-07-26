@@ -1,0 +1,42 @@
+---
+import { socials } from '../data/site';
+import { SOCIAL_ICON_PATHS } from '../data/icons';
+
+/**
+ * Riel del margen izquierdo: un filete vertical que baja desde el borde
+ * superior de la página y, en el mismo eje, los enlaces sociales.
+ *
+ * Vive dentro del hero, no fijo a la ventana: más abajo la página tiene la
+ * banda oscura de FlowTrix, y unos iconos en tinta oscura desaparecerían sobre
+ * ella. Los mismos enlaces están completos en la sección de contacto.
+ */
+---
+
+{/* Solo a partir de xl: por debajo de ~1280 px el riel se metería dentro del
+    contenedor de 1180 px y chocaría con el texto. */}
+<div class="absolute top-0 left-6 z-20 hidden flex-col items-center pt-16 xl:flex">
+  {/* Arranca justo bajo la barra del encabezado, no debajo de ella. */}
+  <span aria-hidden="true" class="h-44 w-px bg-ink/25"></span>
+
+  <ul class="mt-7 flex flex-col items-center gap-6">
+    {
+      socials.map((social) => (
+        <li>
+          <a
+            href={social.href}
+            aria-label={social.kind}
+            rel="me noopener"
+            target="_blank"
+            class="block text-ink/55 transition-colors duration-200 hover:text-link"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="size-6">
+              {SOCIAL_ICON_PATHS[social.kind.toLowerCase()].map((d) => (
+                <path d={d} />
+              ))}
+            </svg>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

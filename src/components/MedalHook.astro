@@ -1,0 +1,151 @@
+---
+interface Props {
+  tone: 'silver' | 'bronze';
+}
+
+const { tone } = Astro.props;
+
+/**
+ * El punto que separa el metal del certamen hace de gancho: de él cuelga la
+ * medalla.
+ *
+ * Colgar del punto y no de la palabra resuelve el problema anterior — un cordón
+ * que abrazaba «Plata» o «Bronce» tenía que estirarse a anchos distintos y nunca
+ * caía natural. El punto siempre mide lo mismo, así que el cordón cae recto.
+ *
+ * Todo va fuera del flujo: la línea de texto no se mueve ni un píxel.
+ */
+
+/** Los degradados se referencian por id, y cada premio se pinta dos veces:
+ *  una para escritorio y otra para móvil. */
+const uid = Math.random().toString(36).slice(2, 8);
+const gradientId = `medal-${tone}-${uid}`;
+
+const CORD = {
+  silver: '#1e9d57',
+  bronze: '#c0392b',
+} as const;
+
+const PLATE = {
+  silver: { light: '#F1F3F5', mid: '#AEB4BC', shine: '#DDE1E6', dark: '#767C85', edge: '#565C64' },
+  bronze: { light: '#EFC085', mid: '#BC7C39', shine: '#DFA463', dark: '#8A5720', edge: '#6B4316' },
+} as const;
+
+const plate = PLATE[tone];
+---
+
+{/* Sin un solo espacio entre el punto y el colgante: el salto de línea de la
+    plantilla se convierte en un espacio real dentro del <span>, ensancha la
+    caja y el centrado del cordón se desvía a la derecha del punto. */}<span
+  class="medal-hook"
+>·<span class="hanger">
+    <svg viewBox="0 0 16 64" aria-hidden="true" class="medal">
+      <defs>
+        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color={plate.light} />
+          <stop offset="34%" stop-color={plate.mid} />
+          <stop offset="50%" stop-color={plate.shine} />
+          <stop offset="72%" stop-color={plate.mid} />
+          <stop offset="100%" stop-color={plate.dark} />
+        </linearGradient>
+      </defs>
+
+      {/* Cordón: cae recto desde el punto. Ocupa casi la mitad del alto, así
+          que la placa queda colgando bien por debajo de la línea de texto. */}
+      <path
+        d="M8 0V31"
+        fill="none"
+        stroke={CORD[tone]}
+        stroke-width="1.7"
+        stroke-linecap="round"
+      />
+
+      {/* Anilla entre el cordón y la placa. */}
+      <rect x="6.1" y="29" width="3.8" height="5.5" rx="1.4" fill={plate.dark} />
+
+      {/* Placa rectangular vertical. */}
+      <rect
+        x="1.5"
+        y="33.5"
+        width="13"
+        height="29"
+        rx="2"
+        fill={`url(#${gradientId})`}
+        stroke={plate.edge}
+        stroke-width="0.7"
+      />
+
+      {/* Bisel interior: le da grosor a la placa. */}
+      <rect
+        x="3.7"
+        y="35.7"
+        width="8.6"
+        height="24.6"
+        rx="1"
+        fill="none"
+        stroke={plate.edge}
+        stroke-opacity="0.4"
+        stroke-width="0.6"
+      />
+    </svg></span></span>
+
+<style>
+  .medal-hook {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Fuera del flujo: la medalla cuelga sin desplazar el texto. */
+  .hanger {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    translate: -50% 0;
+    line-height: 0;
+  }
+
+  .medal {
+    display: block;
+    height: 54px;
+    width: auto;
+    transform-box: fill-box;
+    /* Pivota en el punto, que es de donde cuelga. */
+    transform-origin: top center;
+  }
+
+  /* Se columpia al rozar cualquier parte del premio, no solo el punto.
+     `.award-line` la pone el componente que usa este gancho. */
+  :global(.award-line):hover .medal,
+  .medal-hook:hover .medal {
+    animation: medal-swing 1.8s cubic-bezier(0.25, 0.6, 0.3, 1);
+  }
+
+  /* Péndulo amortiguado: cada vaivén más corto que el anterior. */
+  @keyframes medal-swing {
+    0% {
+      transform: rotate(0deg);
+    }
+    18% {
+      transform: rotate(12deg);
+    }
+    40% {
+      transform: rotate(-7.5deg);
+    }
+    60% {
+      transform: rotate(4deg);
+    }
+    78% {
+      transform: rotate(-1.8deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.award-line):hover .medal,
+    .medal-hook:hover .medal {
+      animation: none;
+    }
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+// Easter egg: se abre con el rombo verde del footer.
+// <dialog> nativo aporta gratis el atrapado de foco, el fondo inerte y Esc.
+---
+
+<dialog
+  id="game-dialog"
+  aria-labelledby="game-title"
+  class="m-auto w-[560px] max-w-[calc(100vw-2.5rem)] rounded-[3px] border border-ink/10 bg-ground p-7 text-ink shadow-[0_40px_80px_-30px_rgba(13,21,38,0.5)] backdrop:bg-night/55 backdrop:backdrop-blur-sm"
+>
+  <div class="flex items-center justify-between gap-4 border-b border-ink/12 pb-3">
+    <h2 id="game-title" class="u-label text-graphite">Packet Catch</h2>
+    <button
+      type="button"
+      data-close-dialog
+      aria-label="Cerrar minijuego"
+      class="cursor-pointer font-mono text-lg leading-none text-graphite transition-colors hover:text-ink"
+    >
+      ×
+    </button>
+  </div>
+
+  <p class="mt-4 mb-5 text-sm text-graphite">
+    Mueve el router con el mouse o las flechas. Atrapa los paquetes buenos, esquiva los rojos.
+  </p>
+
+  <canvas
+    id="game-canvas"
+    width="504"
+    height="340"
+    class="block w-full cursor-none rounded-[3px] border border-ink/10 bg-panel"></canvas>
+
+  <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+    <p class="u-label text-graphite" aria-live="polite">
+      Puntos <strong class="text-ink" data-game-score>0</strong> · Vidas
+      <strong class="text-ink" data-game-lives>3</strong>
+    </p>
+    <button type="button" data-restart-game class="u-btn u-btn-solid !px-5 !py-2.5 !text-sm">
+      Reiniciar
+    </button>
+  </div>
+</dialog>

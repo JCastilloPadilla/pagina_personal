@@ -1,0 +1,102 @@
+---
+import { PALM_ARTWORK } from '../data/palms';
+
+/**
+ * Palmeras: la fila que asoma sobre el bloque del pie.
+ *
+ * Este componente solo coloca: escala, espeja y mece con el cursor. El dibujo
+ * vive en `src/data/palms.ts` y se puede sustituir por cualquier SVG sin tocar
+ * nada de aquí.
+ */
+
+interface Instance {
+  /** Índice dentro de PALM_ARTWORK. */
+  art: number;
+  x: number;
+  scale: number;
+  flip: boolean;
+  /** Grados que se inclina al pasar el cursor. */
+  tilt: number;
+}
+
+/** El espejo duplica la variedad aparente sin costar un solo byte extra. */
+const PALMS: Instance[] = [
+  { art: 2, x: 26, scale: 0.3, flip: false, tilt: -7 },
+  { art: 1, x: 80, scale: 0.32, flip: true, tilt: 6 },
+  { art: 0, x: 132, scale: 0.26, flip: false, tilt: -8 },
+  { art: 1, x: 188, scale: 0.4, flip: false, tilt: 7 },
+  { art: 2, x: 246, scale: 0.35, flip: true, tilt: -6 },
+  { art: 0, x: 300, scale: 0.42, flip: false, tilt: 8 },
+  { art: 2, x: 352, scale: 0.27, flip: true, tilt: -7 },
+  { art: 1, x: 404, scale: 0.33, flip: false, tilt: 6 },
+];
+
+const BASELINE = 112;
+/** Ajustado a la extensión real de las palmeras: si sobra lienzo a un lado,
+ *  la fila deja de verse centrada bajo el bloque. */
+const VIEW_WIDTH = 438;
+---
+
+<svg
+  viewBox={`0 0 ${VIEW_WIDTH} ${BASELINE}`}
+  role="presentation"
+  class="pointer-events-none h-16 w-auto text-link sm:h-20 lg:h-24"
+>
+  <defs>
+    {
+      PALM_ARTWORK.map((art) => (
+        <g id={art.id} fill="currentColor">
+          {art.paths.map((d) => (
+            <path d={d} />
+          ))}
+          {art.circles.map((c) => (
+            <circle cx={c.cx} cy={c.cy} r={c.r} />
+          ))}
+        </g>
+      ))
+    }
+  </defs>
+
+  {
+    PALMS.map((palm) => {
+      const art = PALM_ARTWORK[palm.art];
+
+      return (
+        <g
+          transform={`translate(${palm.x} ${BASELINE}) scale(${palm.flip ? -palm.scale : palm.scale} ${palm.scale})`}
+        >
+          {/* El grupo interno es el que rota: el `transform` del padre coloca y
+              escala, y una transformación de CSS lo reemplazaría en vez de
+              sumarse. */}
+          <g class="palm" style={`--tilt: ${palm.tilt}deg`}>
+            {/* Zona sensible al cursor. Sin ella, apuntar a una hoja fina sería
+                casi imposible. */}
+            <rect
+              x={-art.halfWidth}
+              y={-art.height}
+              width={art.halfWidth * 2}
+              height={art.height}
+              fill="transparent"
+            />
+
+            <use href={`#${art.id}`} />
+          </g>
+        </g>
+      );
+    })
+  }
+</svg>
+
+<style>
+  .palm {
+    pointer-events: auto;
+    transform-box: fill-box;
+    transform-origin: bottom center;
+    /* Rebote corto al soltar: se mece, no gira sobre una bisagra. */
+    transition: transform 620ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .palm:hover {
+    transform: rotate(var(--tilt));
+  }
+</style>

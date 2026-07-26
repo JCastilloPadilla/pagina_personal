@@ -1,0 +1,7 @@
+Los endpoints PHP van aquí.
+
+Astro copia `public/` tal cual dentro de `dist/` al compilar, así que
+`public/api/contacto.php` termina en `dist/api/contacto.php` y Apache lo
+ejecuta desde el mismo origen que el sitio: sin CORS y sin Node en producción.
+
+Todavía vacío: la fase 1 es solo maqueta.

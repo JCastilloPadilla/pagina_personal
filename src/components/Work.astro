@@ -1,0 +1,39 @@
+---
+import { work } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+---
+
+{/* Lista, no tarjetas. Una lista dice "hay más de estos"; dos tarjetas
+    grandes con un hueco para captura dicen "esto es todo lo que tengo". */}
+<section id="trabajo" class="mx-auto max-w-[1180px] px-6 pt-24 pb-24 sm:px-8 lg:pt-32">
+  <SectionHeading label="Más trabajo" />
+
+  <ul>
+    {
+      work.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="group grid items-baseline gap-x-10 gap-y-3 border-b border-ink/12 py-9 transition-colors hover:bg-ink/[0.03] lg:grid-cols-[minmax(0,26ch)_minmax(0,1fr)_auto]"
+          >
+            <h3 class="u-display text-[26px] transition-colors group-hover:text-link">
+              {item.title}
+            </h3>
+
+            <p class="max-w-[58ch] text-[15px] leading-[1.65] text-graphite">{item.summary}</p>
+
+            <span class="u-label flex items-center gap-4 text-graphite">
+              {item.meta}
+              <span
+                aria-hidden="true"
+                class="inline-block transition-transform duration-200 group-hover:translate-x-1 group-hover:text-link"
+              >
+                →
+              </span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

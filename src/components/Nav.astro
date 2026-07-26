@@ -1,0 +1,53 @@
+---
+import { nav, site } from '../data/site';
+---
+
+{/* Sin barra: las piezas flotan sobre el fondo. El contenedor no pinta nada y
+    deja pasar los clics; solo las piezas son sensibles.
+
+    El velo va en cada cajita, no en una barra. Sobre el fondo plano del sitio
+    es del mismo color que la página, así que se ven flotando; sobre el shader
+    del hero y sobre la banda oscura de FlowTrix se recortan solas y mantienen
+    el texto legible (8.3:1 en el peor caso). */}
+<header
+  class="pointer-events-none fixed inset-x-0 top-0 z-40 flex items-center justify-between gap-4 px-5 py-4 sm:px-8"
+>
+  {/* La firma va suelta, sin caja. Como no tiene velo propio, el halo del color
+      del fondo la rescata sobre la banda oscura: en claro es invisible, en
+      oscuro recorta las letras sin dibujar un rectángulo. */}
+  <a
+    href="#inicio"
+    class="pointer-events-auto shrink-0 font-display text-[16px] text-ink italic [text-shadow:0_0_10px_rgba(237,241,247,0.95),0_0_22px_rgba(237,241,247,0.75)] transition-opacity duration-200 hover:opacity-70"
+  >
+    <span class="sm:hidden">JC</span>
+    <span class="hidden sm:inline">{site.shortName}</span>
+  </a>
+
+  <nav aria-label="Navegación principal" class="pointer-events-auto min-w-0">
+    {/* En pantallas estrechas las cuatro cajitas no caben: la lista desliza, y
+        el desvanecido del borde avisa de que hay más. En sm ya cabe todo, así
+        que se quita el recorte —si no, el ensanche del hover se cortaría. */}
+    <ul
+      class="flex items-center justify-end gap-1.5 overflow-x-auto [mask-image:linear-gradient(to_right,#000_86%,transparent_100%)] sm:overflow-visible sm:[mask-image:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    >
+      {
+        nav.map((item) => (
+          <li>
+            {/* El hover ensancha la cajita en vez de escalarla: crecen a la vez
+                el relleno lateral y la separación de los corchetes, así que la
+                caja se estira y empuja a sus vecinas de la izquierda. Como la
+                lista está anclada a la derecha, el crecimiento va hacia allá. */}
+            <a
+              href={item.href}
+              class="group flex shrink-0 items-center gap-1.5 bg-ground/70 px-2.5 py-1.5 font-mono text-[13px] whitespace-nowrap text-ink backdrop-blur-md transition-[gap,padding] duration-300 ease-out hover:gap-3 hover:px-4"
+            >
+              <span class="text-ink/35 transition-colors group-hover:text-link">[</span>
+              {item.label}
+              <span class="text-ink/35 transition-colors group-hover:text-link">]</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

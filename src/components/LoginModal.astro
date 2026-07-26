@@ -1,0 +1,56 @@
+---
+// Easter egg: tres clics en el `·` del footer.
+// Maqueta por ahora — no hay sesión ni backend, el envío solo muestra el error.
+---
+
+<dialog
+  id="login-dialog"
+  aria-labelledby="login-title"
+  class="m-auto w-[380px] max-w-[calc(100vw-2.5rem)] rounded-[3px] border border-ink/10 bg-ground p-8 text-ink shadow-[0_40px_80px_-30px_rgba(13,21,38,0.5)] backdrop:bg-night/60 backdrop:backdrop-blur-md"
+>
+  <div class="flex items-center justify-between gap-4 border-b border-ink/12 pb-3">
+    <span class="u-label text-graphite">Acceso privado</span>
+    <button
+      type="button"
+      data-close-dialog
+      aria-label="Cerrar acceso privado"
+      class="cursor-pointer font-mono text-lg leading-none text-graphite transition-colors hover:text-ink"
+    >
+      ×
+    </button>
+  </div>
+
+  <h2 id="login-title" class="u-display mt-6 mb-7 text-[28px]">Dashboard</h2>
+
+  <form id="login-form" novalidate>
+    <label for="login-user" class="sr-only">Usuario</label>
+    <input
+      id="login-user"
+      name="usuario"
+      type="text"
+      autocomplete="username"
+      placeholder="Usuario"
+      class="mb-3 w-full rounded-[3px] border border-ink/15 bg-panel px-4 py-3.5 font-mono text-sm text-ink outline-none focus:border-link"
+    />
+
+    <label for="login-pass" class="sr-only">Contraseña</label>
+    <input
+      id="login-pass"
+      name="password"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Contraseña"
+      class="mb-6 w-full rounded-[3px] border border-ink/15 bg-panel px-4 py-3.5 font-mono text-sm text-ink outline-none focus:border-link"
+    />
+
+    <button type="submit" class="u-btn u-btn-solid w-full justify-center">Entrar</button>
+
+    <p
+      data-login-message
+      role="status"
+      aria-live="polite"
+      class="u-label mt-4 min-h-[16px] text-center text-alert"
+    >
+    </p>
+  </form>
+</dialog>

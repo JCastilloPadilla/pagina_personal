@@ -1,0 +1,95 @@
+---
+import { featured } from '../data/site';
+import MedalHook from './MedalHook.astro';
+import SectionHeading from './SectionHeading.astro';
+---
+
+{/* Sin bloque de color ni textura propia: FlowTrix pesa por tamaño y por aire.
+    Su titular es tres veces mayor que el de cualquier otra sección y respira
+    más arriba y abajo; eso basta para que se lea como la pieza principal. */}
+<section id="proyectos">
+  <div class="mx-auto max-w-[1180px] px-6 py-28 sm:px-8 lg:py-40">
+    <SectionHeading label="Proyecto principal">
+      <Fragment slot="meta">
+        {
+          featured.awards.map((award) => (
+            <p class="award-line u-label hidden text-graphite sm:block">
+              <span class:list={[award.tone === 'silver' ? 'text-silver' : 'text-bronze']}>
+                {award.medal}
+              </span> <MedalHook tone={award.tone} /> {award.place}
+            </p>
+          ))
+        }
+      </Fragment>
+    </SectionHeading>
+
+    <div class="mt-14 grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,46%)] lg:gap-16">
+      <div>
+        <h3 class="u-display text-[clamp(52px,7vw,92px)]">{featured.title}</h3>
+
+        {/* El mínimo es 24 px y no 22: por debajo de esa medida el azul sobre
+            papel deja de contar como texto grande y su 3.98:1 reprobaría. */}
+        <p class="u-display mt-6 max-w-[16ch] text-[clamp(24px,2.4vw,32px)] text-link">
+          {featured.statement}
+        </p>
+
+        <p class="mt-7 max-w-[54ch] text-[17px] leading-[1.7] text-graphite">
+          {featured.summary}
+        </p>
+
+        <ul class="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-t border-ink/12 pt-5">
+          {featured.tags.map((tag) => <li class="u-label text-graphite">{tag}</li>)}
+        </ul>
+
+        <div class="mt-9 flex flex-wrap gap-3">
+          {
+            featured.links.map((link) => (
+              <a
+                href={link.href}
+                class:list={['u-btn', link.variant === 'solid' ? 'u-btn-solid' : 'u-btn-line']}
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+
+        {/* En móvil los premios no caben junto al filete: van aquí. El hueco
+            entre líneas y el de abajo dejan pasar el colgante, que baja 54 px
+            bajo el punto. */}
+        <ul class="mt-9 space-y-[70px] pb-6 sm:hidden">
+          {
+            featured.awards.map((award) => (
+              <li class="award-line u-label text-graphite">
+                <span class:list={[award.tone === 'silver' ? 'text-silver' : 'text-bronze']}>
+                  {award.medal}
+                </span> <MedalHook tone={award.tone} /> {award.place}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        {
+          featured.image ? (
+            <img
+              src={featured.image}
+              alt={featured.imageAlt}
+              class="w-full rounded-[3px] border border-ink/12"
+              loading="lazy"
+            />
+          ) : (
+            <div
+              role="img"
+              aria-label={featured.imageAlt}
+              class="flex aspect-[4/3] w-full items-center justify-center rounded-[3px] border border-dashed border-ink/20 bg-panel/60"
+            >
+              <span class="u-label px-6 text-center text-graphite">{featured.imageAlt}</span>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

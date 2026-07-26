@@ -1,0 +1,65 @@
+---
+import { profile, stackGroups } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section id="sobre" class="relative isolate">
+  {/* Topología de red como marca de agua. Aquí tiene más sentido que en el
+      hero: acompaña al texto donde se explica a qué se dedica, en vez de
+      competir con el nombre. Va al 50 % para no estorbar la lectura. */}
+  <div
+    id="topology"
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 opacity-50"
+  >
+  </div>
+
+  {/* Los bordes se funden con el fondo del sitio para que no se vea el corte
+      del canvas contra las secciones vecinas. */}
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,var(--color-ground)_0%,transparent_22%,transparent_78%,var(--color-ground)_100%)]"
+  >
+  </div>
+
+  <div class="mx-auto max-w-[1180px] px-6 pt-24 pb-24 sm:px-8 lg:pt-32">
+    <SectionHeading label="Sobre mí" />
+
+    <div class="mt-12 grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:gap-20">
+      <div>
+        <p class="u-display max-w-[18ch] text-[clamp(28px,3.4vw,44px)] leading-[1.08]">
+          {profile.lead}
+        </p>
+
+        <div class="mt-9 max-w-[62ch] space-y-5 text-[17px] leading-[1.7] text-graphite">
+          {profile.bio.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </div>
+
+      {/* Ficha técnica en vez de una nube de etiquetas: agrupar dice para qué
+          sirve cada herramienta, una lista suelta no dice nada. */}
+      <div>
+        <p class="u-label pb-3 text-graphite">Ficha técnica</p>
+
+        <dl>
+          {
+            stackGroups.map((group) => (
+              <div class="flex items-baseline gap-6 border-t border-ink/12 py-3.5">
+                <dt class="u-label w-20 shrink-0 text-graphite">{group.label}</dt>
+                <dd class="font-mono text-[13px] text-ink">{group.items.join(' · ')}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // three.js pesa ~500 KB: se carga en su propio chunk y solo si de verdad
+  // se va a usar. Quien pide menos animación nunca lo descarga.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    import('../scripts/topology').then(({ initTopology }) => initTopology('#topology'));
+  }
+</script>

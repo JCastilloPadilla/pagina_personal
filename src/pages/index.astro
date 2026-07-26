@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Featured from '../components/Featured.astro';
+import Work from '../components/Work.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import SectionRule from '../components/SectionRule.astro';
+import GameModal from '../components/GameModal.astro';
+import LoginModal from '../components/LoginModal.astro';
+---
+
+<BaseLayout>
+  <Nav />
+
+  {/* Las secciones se separan con filetes, no con bloques de color. */}
+  <main>
+    <Hero />
+    <About />
+    <SectionRule />
+    <Featured />
+    <SectionRule />
+    <Work />
+    <SectionRule />
+    <Contact />
+  </main>
+
+  <Footer />
+
+  <GameModal />
+  <LoginModal />
+</BaseLayout>
+
+<script>
+  import { initModals } from '../scripts/modals';
+
+  initModals();
+</script>

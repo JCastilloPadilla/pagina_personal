@@ -1,0 +1,30 @@
+---
+/**
+ * Separador entre secciones: un filete a sangre completa y, donde cruza con
+ * las reglas de margen de la página, una marca en cruz.
+ *
+ * Es el único sitio donde aparecen las cruces. Puestas como campo detrás del
+ * texto ensuciaban la lectura; puestas en los cruces de la retícula señalan la
+ * estructura y no estorban a nada.
+ */
+---
+
+<div aria-hidden="true" class="relative border-t border-ink/12">
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 mx-auto w-[calc(100%-3rem)] max-w-[1180px] sm:w-[calc(100%-4rem)]"
+  >
+    <svg
+      viewBox="0 0 12 12"
+      class="absolute top-0 left-0 size-3 -translate-x-1/2 -translate-y-1/2 text-ink/30"
+    >
+      <path d="M6 1.5v9M1.5 6h9" fill="none" stroke="currentColor" stroke-width="1" />
+    </svg>
+
+    <svg
+      viewBox="0 0 12 12"
+      class="absolute top-0 right-0 size-3 translate-x-1/2 -translate-y-1/2 text-ink/30"
+    >
+      <path d="M6 1.5v9M1.5 6h9" fill="none" stroke="currentColor" stroke-width="1" />
+    </svg>
+  </div>
+</div>

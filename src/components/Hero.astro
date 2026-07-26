@@ -1,0 +1,84 @@
+---
+import { profile } from '../data/site';
+import HeroWarp from './HeroWarp';
+import SocialRail from './SocialRail.astro';
+---
+
+{/* Capas del hero, de atrás hacia adelante:
+    -z-30  campo de color animado (Paper Shaders)
+    -z-10  velos que calman el fondo bajo el texto
+     auto  contenido */}
+<section id="inicio" class="relative isolate flex min-h-[88vh] flex-col">
+  {/* `client:only` y no `client:load`: el componente monta un canvas WebGL, que
+      no existe al renderizar en el servidor. Así se salta el paso de SSR en vez
+      de generar un marcado que habría que hidratar y reemplazar.
+      `pointer-events-none` deja pasar los clics a los botones del hero. */}
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-30 overflow-hidden">
+    <HeroWarp client:only="react" />
+  </div>
+
+  {/* Velo lateral: deja ver el campo de color en todo el hero, pero lo apaga
+      donde va el titular. */}
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(100deg,color-mix(in_srgb,var(--color-ground)_64%,transparent)_0%,color-mix(in_srgb,var(--color-ground)_48%,transparent)_42%,color-mix(in_srgb,var(--color-ground)_28%,transparent)_72%,color-mix(in_srgb,var(--color-ground)_18%,transparent)_100%)]"
+  >
+  </div>
+
+  {/* Fundido inferior: el hero entra en el resto de la página sin costura. */}
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48 bg-[linear-gradient(to_bottom,transparent,var(--color-ground))]"
+  >
+  </div>
+
+  <SocialRail />
+
+  {/* pt mayor que pb: deja aire bajo la píldora fija en ventanas cortas. */}
+  <div
+    class="mx-auto flex w-full max-w-[1180px] flex-1 flex-col justify-center px-6 pt-32 pb-20 sm:px-8"
+  >
+    {/* En el hero el fondo es un campo de color vivo, no papel plano: el texto
+        secundario sube de `graphite` a `ink/80`. Sobre el azul más oscuro de la
+        paleta, `graphite` se queda en 2.97:1 y reprueba AA; así llega a 6:1. */}
+    <p class="u-rise u-label text-ink/80" style="animation-delay: 60ms">
+      {profile.place}
+    </p>
+
+    <h1
+      class="u-rise u-display mt-6 text-[clamp(46px,8.5vw,116px)]"
+      style="animation-delay: 140ms"
+    >
+      Jose Carlos<br />Castillo Padilla
+    </h1>
+
+    <p
+      class="u-rise mt-8 max-w-[44ch] text-lg leading-relaxed text-ink/80 sm:text-xl"
+      style="animation-delay: 240ms"
+    >
+      {profile.tagline}
+    </p>
+
+    <div class="u-rise mt-10 flex flex-wrap items-center gap-3" style="animation-delay: 320ms">
+      <a href="#proyectos" class="u-btn u-btn-solid">
+        Ver FlowTrix
+        <span aria-hidden="true">→</span>
+      </a>
+      <a href="#contacto" class="u-btn u-btn-line">Escríbeme</a>
+    </div>
+  </div>
+
+  {/* Franja de estado, como la barra inferior de un panel de monitoreo. */}
+  <div class="u-rise border-t border-ink/12" style="animation-delay: 420ms">
+    <div
+      class="mx-auto flex w-full max-w-[1180px] flex-wrap items-center gap-x-8 gap-y-2 px-6 py-4 sm:px-8"
+    >
+      <p class="u-label flex items-center gap-2.5 text-ink">
+        <span class="u-dot" aria-hidden="true"></span>
+        Último año de Ingeniería en Sistemas
+      </p>
+      <p class="u-label text-ink/80">Redes · Sistemas · Seguridad</p>
+      <p class="u-label text-ink/80 sm:ml-auto">Abierto a prácticas</p>
+    </div>
+  </div>
+</section>
