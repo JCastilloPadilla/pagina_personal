@@ -1,0 +1,513 @@
+<div
+  class="network-topology"
+  data-network-topology
+  role="img"
+  aria-label="Topología de FlowTrix: cuatro equipos envían telemetría al monitor central"
+>
+  <div class="topology-head" aria-hidden="true">
+    <span>TOPOLOGY / LIVE</span>
+    <span class="topology-status"><i></i> ONLINE</span>
+  </div>
+
+  <div class="topology-field" aria-hidden="true">
+    <div class="link link-a"><i class="packet packet-a"></i></div>
+    <div class="link link-b"><i class="packet packet-b"></i></div>
+    <div class="link link-c"><i class="packet packet-c"></i></div>
+    <div class="link link-d"><i class="packet packet-d"></i></div>
+
+    <div class="device device-a">
+      <span class="device-icon"><i></i><i></i></span>
+      <span class="device-name">EQUIPO 01</span>
+      <span class="device-state">EN LÍNEA</span>
+    </div>
+
+    <div class="device device-b">
+      <span class="device-icon"><i></i><i></i></span>
+      <span class="device-name">EQUIPO 02</span>
+      <span class="device-state">EN LÍNEA</span>
+    </div>
+
+    <div class="device device-c">
+      <span class="device-icon"><i></i><i></i></span>
+      <span class="device-name">EQUIPO 03</span>
+      <span class="device-state">EN LÍNEA</span>
+    </div>
+
+    <div class="device device-d">
+      <span class="device-icon"><i></i><i></i></span>
+      <span class="device-name">EQUIPO 04</span>
+      <span class="device-state">EN LÍNEA</span>
+    </div>
+
+    <div class="core">
+      <i class="core-ring ring-one"></i>
+      <i class="core-ring ring-two"></i>
+      <strong>FlowTrix</strong>
+      <small>MONITOR</small>
+    </div>
+
+    <div class="alert-flag">
+      <i></i>
+      <span>ALERT / PORT 5433</span>
+    </div>
+  </div>
+
+  <div class="topology-foot" aria-hidden="true">
+    <span>4 EQUIPOS</span>
+    <span>32 PKT/S</span>
+    <span>LATENCY 18MS</span>
+  </div>
+</div>
+
+<script>
+  const topologies = document.querySelectorAll<HTMLElement>('[data-network-topology]');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle('is-active', entry.isIntersecting);
+      });
+    },
+    { threshold: 0.35 },
+  );
+
+  topologies.forEach((topology) => observer.observe(topology));
+</script>
+
+<style>
+  .network-topology {
+    position: relative;
+    align-self: center;
+    min-height: 410px;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 15%, transparent);
+    border-radius: 3px;
+    background:
+      linear-gradient(color-mix(in srgb, var(--color-link) 5%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--color-link) 5%, transparent) 1px, transparent 1px),
+      color-mix(in srgb, var(--color-panel) 58%, transparent);
+    background-size: 28px 28px;
+    box-shadow: 0 18px 45px rgb(13 24 42 / 7%);
+    transition:
+      transform 350ms ease,
+      border-color 350ms ease,
+      box-shadow 350ms ease;
+  }
+
+  .network-topology:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--color-link) 35%, transparent);
+    box-shadow: 0 22px 55px rgb(13 24 42 / 11%);
+  }
+
+  .topology-head,
+  .topology-foot {
+    position: absolute;
+    z-index: 8;
+    right: 16px;
+    left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--color-graphite);
+  }
+
+  .topology-head {
+    top: 14px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid rgb(13 21 38 / 10%);
+  }
+
+  .topology-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-up);
+  }
+
+  .topology-status i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 8px currentColor;
+  }
+
+  .topology-foot {
+    bottom: 13px;
+    justify-content: flex-start;
+    gap: 18px;
+    padding-top: 10px;
+    border-top: 1px solid rgb(13 21 38 / 10%);
+  }
+
+  .topology-field {
+    position: absolute;
+    inset: 43px 0 37px;
+  }
+
+  .link {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    height: 1px;
+    transform-origin: left center;
+    background: linear-gradient(90deg, rgb(47 107 255 / 65%), rgb(13 21 38 / 18%));
+    transition: background-color 240ms ease;
+  }
+
+  .link::before {
+    position: absolute;
+    inset: -3px 0;
+    content: '';
+    border-top: 1px dashed rgb(47 107 255 / 17%);
+  }
+
+  .link-a {
+    width: 43%;
+    transform: rotate(-146deg);
+  }
+
+  .link-b {
+    width: 41%;
+    transform: rotate(-34deg);
+  }
+
+  .link-c {
+    width: 42%;
+    transform: rotate(146deg);
+  }
+
+  .link-d {
+    width: 42%;
+    transform: rotate(34deg);
+  }
+
+  .packet {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-link);
+    box-shadow:
+      0 0 7px var(--color-link),
+      0 0 14px rgb(47 107 255 / 55%);
+    animation: packet-flow 2.8s linear infinite;
+    animation-play-state: paused;
+  }
+
+  .packet-b {
+    animation-delay: -0.8s;
+    animation-duration: 3.2s;
+  }
+
+  .packet-c {
+    animation-delay: -1.7s;
+    animation-duration: 3.5s;
+  }
+
+  .packet-d {
+    animation-delay: -2.4s;
+    animation-duration: 3s;
+  }
+
+  .is-active .packet,
+  .is-active .core-ring,
+  .is-active .device,
+  .is-active .alert-flag {
+    animation-play-state: running;
+  }
+
+  .network-topology:hover .packet {
+    animation-duration: 1.65s;
+  }
+
+  .device {
+    position: absolute;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 28px auto;
+    grid-template-rows: auto auto;
+    column-gap: 8px;
+    align-items: center;
+    min-width: 104px;
+    padding: 9px 10px;
+    border: 1px solid rgb(13 21 38 / 16%);
+    background: color-mix(in srgb, var(--color-ground) 91%, white);
+    box-shadow: 0 6px 18px rgb(13 24 42 / 6%);
+    animation: node-alert 12s steps(1, end) infinite;
+    animation-play-state: paused;
+    transition:
+      transform 220ms ease,
+      border-color 220ms ease;
+  }
+
+  .device-a {
+    top: 12%;
+    left: 4%;
+    animation-delay: -2s;
+  }
+
+  .device-b {
+    top: 12%;
+    right: 4%;
+    animation-delay: -8s;
+  }
+
+  .device-c {
+    bottom: 12%;
+    left: 4%;
+    animation-delay: -5s;
+  }
+
+  .device-d {
+    right: 4%;
+    bottom: 12%;
+    animation-delay: -11s;
+  }
+
+  .device:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-link);
+  }
+
+  .device-icon {
+    grid-row: 1 / 3;
+    position: relative;
+    display: block;
+    width: 28px;
+    height: 22px;
+    border: 1px solid currentColor;
+    color: var(--color-graphite);
+  }
+
+  .device-icon::after {
+    position: absolute;
+    right: 6px;
+    bottom: -5px;
+    left: 6px;
+    height: 4px;
+    content: '';
+    border-top: 1px solid currentColor;
+    border-right: 3px solid transparent;
+    border-left: 3px solid transparent;
+  }
+
+  .device-icon i {
+    position: absolute;
+    bottom: 3px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--color-up);
+  }
+
+  .device-icon i:first-child {
+    left: 4px;
+  }
+
+  .device-icon i:last-child {
+    left: 10px;
+    opacity: 0.35;
+  }
+
+  .device-name,
+  .device-state {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.13em;
+  }
+
+  .device-name {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .device-state {
+    margin-top: 2px;
+    color: var(--color-up);
+  }
+
+  .core {
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    width: 108px;
+    height: 108px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgb(47 107 255 / 55%);
+    border-radius: 50%;
+    background: var(--color-ground);
+    box-shadow:
+      0 0 0 8px rgb(47 107 255 / 5%),
+      0 12px 30px rgb(13 24 42 / 10%);
+    transition: transform 280ms ease;
+  }
+
+  .network-topology:hover .core {
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+
+  .core strong {
+    font-family: var(--font-display);
+    font-size: 16px;
+    line-height: 1;
+    color: var(--color-ink);
+  }
+
+  .core small {
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 7px;
+    letter-spacing: 0.18em;
+    color: var(--color-graphite);
+  }
+
+  .core-ring {
+    position: absolute;
+    inset: -1px;
+    border: 1px solid rgb(47 107 255 / 30%);
+    border-radius: 50%;
+    animation: core-pulse 3.2s ease-out infinite;
+    animation-play-state: paused;
+  }
+
+  .ring-two {
+    animation-delay: 1.6s;
+  }
+
+  .alert-flag {
+    position: absolute;
+    z-index: 7;
+    top: 55%;
+    right: 13%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 7px;
+    border: 1px solid rgb(255 107 53 / 34%);
+    background: var(--color-ground);
+    font-family: var(--font-mono);
+    font-size: 7px;
+    letter-spacing: 0.1em;
+    color: var(--color-alert);
+    opacity: 0;
+    transform: translateY(4px);
+    animation: alert-pop 12s ease infinite;
+    animation-play-state: paused;
+  }
+
+  .alert-flag i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 7px currentColor;
+  }
+
+  @keyframes packet-flow {
+    from {
+      left: 98%;
+    }
+    to {
+      left: 2%;
+    }
+  }
+
+  @keyframes core-pulse {
+    0% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    75%,
+    100% {
+      opacity: 0;
+      transform: scale(1.38);
+    }
+  }
+
+  @keyframes node-alert {
+    0%,
+    80%,
+    100% {
+      border-color: rgb(13 21 38 / 16%);
+      box-shadow: 0 6px 18px rgb(13 24 42 / 6%);
+    }
+    83%,
+    88% {
+      border-color: var(--color-alert);
+      box-shadow: 0 0 16px rgb(255 107 53 / 25%);
+    }
+    91%,
+    95% {
+      border-color: #d59b16;
+      box-shadow: 0 0 14px rgb(213 155 22 / 22%);
+    }
+  }
+
+  @keyframes alert-pop {
+    0%,
+    78%,
+    100% {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    82%,
+    92% {
+      opacity: 1;
+      transform: none;
+    }
+    96% {
+      opacity: 0;
+      transform: translateY(-3px);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .network-topology {
+      min-height: 360px;
+    }
+
+    .device {
+      min-width: 88px;
+      grid-template-columns: 22px auto;
+      padding: 7px;
+    }
+
+    .device-icon {
+      width: 22px;
+      height: 18px;
+    }
+
+    .device-a,
+    .device-c {
+      left: 2%;
+    }
+
+    .device-b,
+    .device-d {
+      right: 2%;
+    }
+
+    .core {
+      width: 92px;
+      height: 92px;
+    }
+
+    .alert-flag {
+      display: none;
+    }
+  }
+</style>

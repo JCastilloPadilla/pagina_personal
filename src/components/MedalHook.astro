@@ -34,11 +34,11 @@ const PLATE = {
 const plate = PLATE[tone];
 ---
 
-{/* Sin un solo espacio entre el punto y el colgante: el salto de línea de la
-    plantilla se convierte en un espacio real dentro del <span>, ensancha la
-    caja y el centrado del cordón se desvía a la derecha del punto. */}<span
+{/* El separador conserva el ancho de un carácter para no alterar la posición
+    de ninguna palabra. El punto y la cinta comparten el mismo eje. */}<span
   class="medal-hook"
->·<span class="hanger">
+  aria-hidden="true"
+><span class="marker"></span><span class="hanger">
     <svg viewBox="0 0 16 64" aria-hidden="true" class="medal">
       <defs>
         <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
@@ -50,18 +50,15 @@ const plate = PLATE[tone];
         </linearGradient>
       </defs>
 
-      {/* Cordón: cae recto desde el punto. Ocupa casi la mitad del alto, así
-          que la placa queda colgando bien por debajo de la línea de texto. */}
+      {/* Una cinta plana y ligeramente más ancha mantiene la solución mínima.
+          Su extremo entra detrás de la placa para que no necesite herrajes. */}
       <path
-        d="M8 0V31"
+        d="M8 0V35"
         fill="none"
         stroke={CORD[tone]}
-        stroke-width="1.7"
+        stroke-width="2.5"
         stroke-linecap="round"
       />
-
-      {/* Anilla entre el cordón y la placa. */}
-      <rect x="6.1" y="29" width="3.8" height="5.5" rx="1.4" fill={plate.dark} />
 
       {/* Placa rectangular vertical. */}
       <rect
@@ -93,12 +90,50 @@ const plate = PLATE[tone];
   .medal-hook {
     position: relative;
     display: inline-block;
+    width: 1ch;
+    height: 1em;
+    vertical-align: -0.08em;
+  }
+
+  /* Tachuela vista de frente: su cabeza presiona la cinta contra el fondo. */
+  .marker {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    border: 1px solid #4b5565;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 34% 30%,
+      #ffffff 0 10%,
+      #cbd1da 24%,
+      #737e90 58%,
+      #2f394b 100%
+    );
+    box-shadow:
+      0 1px 2px rgb(13 21 38 / 32%),
+      0 0 0 1px rgb(255 255 255 / 45%);
+    translate: -50% -50%;
+  }
+
+  /* Pequeño reflejo central que permite reconocer la cabeza a escala reducida. */
+  .marker::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 1.5px;
+    height: 1.5px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 78%);
   }
 
   /* Fuera del flujo: la medalla cuelga sin desplazar el texto. */
   .hanger {
     position: absolute;
-    top: 100%;
+    top: 50%;
     left: 50%;
     translate: -50% 0;
     line-height: 0;
@@ -109,14 +144,13 @@ const plate = PLATE[tone];
     height: 54px;
     width: auto;
     transform-box: fill-box;
+    will-change: transform;
     /* Pivota en el punto, que es de donde cuelga. */
     transform-origin: top center;
   }
 
-  /* Se columpia al rozar cualquier parte del premio, no solo el punto.
-     `.award-line` la pone el componente que usa este gancho. */
-  :global(.award-line):hover .medal,
-  .medal-hook:hover .medal {
+  /* La clase permanece hasta `animationend`, aunque el cursor ya haya salido. */
+  .medal.is-swinging {
     animation: medal-swing 1.8s cubic-bezier(0.25, 0.6, 0.3, 1);
   }
 
@@ -143,9 +177,30 @@ const plate = PLATE[tone];
   }
 
   @media (prefers-reduced-motion: reduce) {
-    :global(.award-line):hover .medal,
-    .medal-hook:hover .medal {
+    .medal.is-swinging {
       animation: none;
     }
   }
 </style>
+
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  document.querySelectorAll<HTMLElement>('.award-line').forEach((award) => {
+    const medal = award.querySelector<HTMLElement>('.medal');
+    if (!medal) return;
+
+    award.addEventListener('pointerenter', () => {
+      if (reducedMotion.matches) return;
+
+      /* Reinicia el gesto si el cursor vuelve a pasar antes de que termine. */
+      medal.classList.remove('is-swinging');
+      void medal.offsetWidth;
+      medal.classList.add('is-swinging');
+    });
+
+    medal.addEventListener('animationend', () => {
+      medal.classList.remove('is-swinging');
+    });
+  });
+</script>

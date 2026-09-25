@@ -1,6 +1,7 @@
 ---
 import { profile, stackGroups } from '../data/site';
 import SectionHeading from './SectionHeading.astro';
+import SignalSignature from './SignalSignature.astro';
 ---
 
 <section id="sobre" class="relative isolate">
@@ -23,7 +24,9 @@ import SectionHeading from './SectionHeading.astro';
   </div>
 
   <div class="mx-auto max-w-[1180px] px-6 pt-24 pb-24 sm:px-8 lg:pt-32">
-    <SectionHeading label="Sobre mí" />
+    <SectionHeading label="Sobre mí" index="01 / 04">
+      <Fragment slot="meta"><SignalSignature /></Fragment>
+    </SectionHeading>
 
     <div class="mt-12 grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:gap-20">
       <div>
@@ -45,7 +48,7 @@ import SectionHeading from './SectionHeading.astro';
           {
             stackGroups.map((group) => (
               <div class="flex items-baseline gap-6 border-t border-ink/12 py-3.5">
-                <dt class="u-label w-20 shrink-0 text-graphite">{group.label}</dt>
+                <dt class="u-label w-24 shrink-0 text-graphite">{group.label}</dt>
                 <dd class="font-mono text-[13px] text-ink">{group.items.join(' · ')}</dd>
               </div>
             ))

@@ -104,8 +104,9 @@ body[data-modal-open] {
     color: var(--color-ground);
   }
   .u-btn-solid:hover {
-    background: var(--color-link);
-    color: #fff;
+    background: var(--color-panel);
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 18%, transparent);
   }
 
   .u-btn-line {

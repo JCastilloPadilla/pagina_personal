@@ -4,9 +4,9 @@ import { PALM_ARTWORK } from '../data/palms';
 /**
  * Palmeras: la fila que asoma sobre el bloque del pie.
  *
- * Este componente solo coloca: escala, espeja y mece con el cursor. El dibujo
- * vive en `src/data/palms.ts` y se puede sustituir por cualquier SVG sin tocar
- * nada de aquí.
+ * Este componente coloca, espeja y anima. El dibujo vive en
+ * `src/data/palms.ts`; una ráfaga recorre la fila al entrar en pantalla y cada
+ * palmera conserva después su respuesta individual al cursor.
  */
 
 interface Instance {
@@ -40,6 +40,7 @@ const VIEW_WIDTH = 438;
 <svg
   viewBox={`0 0 ${VIEW_WIDTH} ${BASELINE}`}
   role="presentation"
+  data-footer-garden
   class="pointer-events-none h-16 w-auto text-link sm:h-20 lg:h-24"
 >
   <defs>
@@ -58,8 +59,9 @@ const VIEW_WIDTH = 438;
   </defs>
 
   {
-    PALMS.map((palm) => {
+    PALMS.map((palm, index) => {
       const art = PALM_ARTWORK[palm.art];
+      const wind = palm.flip ? -6 : 6;
 
       return (
         <g
@@ -68,7 +70,10 @@ const VIEW_WIDTH = 438;
           {/* El grupo interno es el que rota: el `transform` del padre coloca y
               escala, y una transformación de CSS lo reemplazaría en vez de
               sumarse. */}
-          <g class="palm" style={`--tilt: ${palm.tilt}deg`}>
+          <g
+            class="palm"
+            style={`--tilt: ${palm.tilt}deg; --wind: ${wind}deg; --wind-back: ${-wind * 0.36}deg; --wind-settle: ${wind * 0.14}deg; --wind-delay: ${index * 95}ms`}
+          >
             {/* Zona sensible al cursor. Sin ella, apuntar a una hoja fina sería
                 casi imposible. */}
             <rect
@@ -88,6 +93,10 @@ const VIEW_WIDTH = 438;
 </svg>
 
 <style>
+  svg {
+    overflow: visible;
+  }
+
   .palm {
     pointer-events: auto;
     transform-box: fill-box;
@@ -99,4 +108,69 @@ const VIEW_WIDTH = 438;
   .palm:hover {
     transform: rotate(var(--tilt));
   }
+
+  svg.is-windy .palm {
+    animation: palm-gust 1.25s cubic-bezier(0.22, 0.72, 0.28, 1) var(--wind-delay) 1;
+  }
+
+  @keyframes palm-gust {
+    0% {
+      transform: rotate(0deg);
+    }
+    35% {
+      transform: rotate(var(--wind));
+    }
+    60% {
+      transform: rotate(var(--wind-back));
+    }
+    80% {
+      transform: rotate(var(--wind-settle));
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    svg.is-windy .palm {
+      animation: none;
+    }
+  }
 </style>
+
+<script>
+  const garden = document.querySelector<SVGElement>('[data-footer-garden]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (garden) {
+    let isInView = false;
+    const palms = garden.querySelectorAll('.palm');
+    const lastPalm = palms.item(palms.length - 1);
+
+    const playWind = () => {
+      if (reducedMotion.matches) return;
+      garden.classList.remove('is-windy');
+      void garden.getBoundingClientRect();
+      garden.classList.add('is-windy');
+    };
+
+    lastPalm?.addEventListener('animationend', () => {
+      garden.classList.remove('is-windy');
+    });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting && !isInView) {
+          isInView = true;
+          playWind();
+        } else if (!entry?.isIntersecting) {
+          isInView = false;
+          garden.classList.remove('is-windy');
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    observer.observe(garden);
+  }
+</script>

@@ -1,5 +1,5 @@
 /**
- * Cableado de los dos easter eggs del footer.
+ * Cableado del minijuego reservado para una próxima iteración.
  *
  * Los diálogos son <dialog> nativos: el atrapado de foco y el fondo inerte
  * vienen de serie. El cierre, en cambio, pasa siempre por `closeDialog()` en
@@ -7,9 +7,6 @@
  * juego no se detuviera al cerrar seguiría comiendo CPU en segundo plano.
  */
 import { createGame, type Game } from './packet-catch';
-
-const LOCK_TAPS_REQUIRED = 3;
-const LOCK_TAPS_WINDOW = 1200;
 
 /** Qué hay que apagar cuando cada diálogo se cierra. Debe ser idempotente. */
 const cleanups = new WeakMap<HTMLDialogElement, () => void>();
@@ -30,7 +27,6 @@ function closeDialog(dialog: HTMLDialogElement): void {
 
 export function initModals(): void {
   const gameDialog = document.querySelector<HTMLDialogElement>('#game-dialog');
-  const loginDialog = document.querySelector<HTMLDialogElement>('#login-dialog');
 
   for (const button of document.querySelectorAll<HTMLButtonElement>('[data-close-dialog]')) {
     const dialog = button.closest('dialog');
@@ -63,7 +59,6 @@ export function initModals(): void {
   }
 
   setupGame(gameDialog);
-  setupLogin(loginDialog);
 }
 
 function setupGame(dialog: HTMLDialogElement | null): void {
@@ -104,39 +99,5 @@ function setupGame(dialog: HTMLDialogElement | null): void {
       event.preventDefault();
       game?.nudge(1);
     }
-  });
-}
-
-function setupLogin(dialog: HTMLDialogElement | null): void {
-  const trigger = document.querySelector<HTMLButtonElement>('[data-lock-tap]');
-  if (!dialog || !trigger) return;
-
-  const form = dialog.querySelector<HTMLFormElement>('#login-form');
-  const message = dialog.querySelector<HTMLElement>('[data-login-message]');
-
-  let taps = 0;
-  let timer: number | undefined;
-
-  trigger.addEventListener('click', () => {
-    taps++;
-
-    if (taps >= LOCK_TAPS_REQUIRED) {
-      taps = 0;
-      window.clearTimeout(timer);
-      if (message) message.textContent = '';
-      form?.reset();
-      openDialog(dialog);
-      return;
-    }
-
-    // Los clics sueltos caducan: hay que dar los tres seguidos.
-    window.clearTimeout(timer);
-    timer = window.setTimeout(() => (taps = 0), LOCK_TAPS_WINDOW);
-  });
-
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    // Sin backend todavía: el panel privado llega con PHP + MySQL.
-    if (message) message.textContent = 'Credenciales incorrectas.';
   });
 }

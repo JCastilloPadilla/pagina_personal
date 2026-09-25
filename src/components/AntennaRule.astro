@@ -1,0 +1,283 @@
+---
+/**
+ * Separador de entrada a Contacto: una antena transmite sobre la misma línea
+ * de la retícula y ocupa únicamente el espacio vacío de la sección anterior.
+ */
+---
+
+<div aria-hidden="true" class="antenna-rule">
+  <div class="antenna-scene">
+    <span class="radio-tower">
+      <span class="tower-leg tower-leg-left"></span>
+      <span class="tower-leg tower-leg-right"></span>
+      <span class="tower-rung tower-rung-low"></span>
+      <span class="tower-rung tower-rung-mid"></span>
+      <span class="tower-rung tower-rung-high"></span>
+      <span class="tower-mast"></span>
+      <span class="transmitter"></span>
+
+      <span class="wave wave-left wave-near"></span>
+      <span class="wave wave-left wave-far"></span>
+      <span class="wave wave-right wave-near"></span>
+      <span class="wave wave-right wave-far"></span>
+    </span>
+
+    <span class="grid-cross grid-cross-left"></span>
+    <span class="grid-cross grid-cross-right"></span>
+  </div>
+</div>
+
+<style>
+  .antenna-rule {
+    position: relative;
+    border-top: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+  }
+
+  .antenna-scene {
+    position: absolute;
+    inset-inline: 1.5rem;
+    bottom: 0;
+    height: 72px;
+    max-width: 1180px;
+    margin-inline: auto;
+    color: var(--color-graphite);
+    pointer-events: none;
+  }
+
+  .radio-tower {
+    --tower-height: 58px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 34px;
+    height: var(--tower-height);
+    opacity: 0.72;
+    translate: -50% 0;
+  }
+
+  /* Dos patas inclinadas convergen en el emisor: silueta real de torre. */
+  .tower-leg {
+    position: absolute;
+    bottom: 0;
+    width: 1px;
+    height: calc(var(--tower-height) - 12px);
+    background: currentColor;
+    transform-origin: bottom center;
+  }
+
+  .tower-leg-left {
+    left: 3px;
+    transform: rotate(17deg);
+  }
+
+  .tower-leg-right {
+    right: 3px;
+    transform: rotate(-17deg);
+  }
+
+  .tower-rung {
+    position: absolute;
+    left: 50%;
+    height: 1px;
+    background: currentColor;
+    translate: -50% 0;
+  }
+
+  .tower-rung-low {
+    bottom: 7px;
+    width: 29px;
+  }
+
+  .tower-rung-mid {
+    bottom: 22px;
+    width: 20px;
+  }
+
+  .tower-rung-high {
+    bottom: 36px;
+    width: 11px;
+  }
+
+  /* El tramo superior separa claramente la torre de una flecha o un poste. */
+  .tower-mast {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 16px;
+    background: currentColor;
+    translate: -50% 0;
+  }
+
+  .transmitter {
+    position: absolute;
+    z-index: 2;
+    top: -4px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    border: 1px solid var(--color-ground);
+    border-radius: 50%;
+    background: var(--color-link);
+    box-shadow: 0 0 7px color-mix(in srgb, var(--color-link) 48%, transparent);
+    translate: -50% 0;
+  }
+
+  .wave {
+    position: absolute;
+    top: -1px;
+    border: 1px solid var(--color-link);
+    opacity: 0.36;
+    translate: 0 -50%;
+  }
+
+  .wave-left {
+    right: calc(50% + 4px);
+    border-right: 0;
+    border-radius: 50% 0 0 50%;
+    transform-origin: right center;
+  }
+
+  .wave-right {
+    left: calc(50% + 4px);
+    border-left: 0;
+    border-radius: 0 50% 50% 0;
+    transform-origin: left center;
+  }
+
+  .wave-near {
+    width: 13px;
+    height: 22px;
+  }
+
+  .wave-far {
+    width: 23px;
+    height: 38px;
+  }
+
+  .antenna-scene.is-active .wave {
+    animation: broadcast 2.6s cubic-bezier(0.2, 0.65, 0.35, 1) infinite;
+  }
+
+  .antenna-scene.is-active .wave-far {
+    animation-delay: 1.3s;
+  }
+
+  @keyframes broadcast {
+    0% {
+      opacity: 0.14;
+      scale: 0.82;
+    }
+    35% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 0.12;
+      scale: 1.14;
+    }
+  }
+
+  .grid-cross {
+    position: absolute;
+    bottom: 0;
+    width: 9px;
+    height: 9px;
+    translate: -50% 50%;
+  }
+
+  .grid-cross::before,
+  .grid-cross::after {
+    content: '';
+    position: absolute;
+    background: color-mix(in srgb, var(--color-ink) 30%, transparent);
+  }
+
+  .grid-cross::before {
+    top: 4px;
+    left: 0;
+    width: 9px;
+    height: 1px;
+  }
+
+  .grid-cross::after {
+    top: 0;
+    left: 4px;
+    width: 1px;
+    height: 9px;
+  }
+
+  .grid-cross-left {
+    left: 0;
+  }
+
+  .grid-cross-right {
+    left: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .antenna-scene {
+      inset-inline: 2rem;
+      height: 86px;
+    }
+
+    .radio-tower {
+      --tower-height: 72px;
+      width: 42px;
+    }
+
+    .tower-leg-left {
+      left: 4px;
+    }
+
+    .tower-leg-right {
+      right: 4px;
+    }
+
+    .tower-rung-low {
+      width: 35px;
+    }
+
+    .tower-rung-mid {
+      bottom: 27px;
+      width: 24px;
+    }
+
+    .tower-rung-high {
+      bottom: 46px;
+      width: 12px;
+    }
+
+    .tower-mast {
+      height: 18px;
+    }
+
+    .wave-near {
+      width: 16px;
+      height: 28px;
+    }
+
+    .wave-far {
+      width: 28px;
+      height: 48px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .antenna-scene.is-active .wave {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const scene = document.querySelector<HTMLElement>('.antenna-scene');
+
+  if (scene) {
+    const observer = new IntersectionObserver(
+      ([entry]) => scene.classList.toggle('is-active', Boolean(entry?.isIntersecting)),
+      { threshold: 0.2 },
+    );
+
+    observer.observe(scene);
+  }
+</script>

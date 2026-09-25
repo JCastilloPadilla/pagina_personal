@@ -1,0 +1,330 @@
+<div aria-hidden="true" class="archive-rule">
+  <div class="archive-scene">
+    <div class="archive-corner archive-left">
+      <span class="archive-box box-back">
+        <i class="box-lid"></i>
+        <i class="box-handle"></i>
+        <b>BACKUP</b>
+      </span>
+      <span class="archive-box box-front">
+        <i class="box-lid"></i>
+        <i class="box-handle"></i>
+        <b>SCRIPT</b>
+      </span>
+      <span class="loose-sheet">
+        <i></i><i></i><i></i>
+      </span>
+    </div>
+
+    <div class="archive-corner archive-right">
+      <span class="folder folder-back">
+        <i class="folder-tab">LAB</i>
+        <b>LAB / 02</b>
+      </span>
+      <span class="folder folder-front">
+        <i class="folder-tab">VLAN</i>
+        <b>VLAN / 04</b>
+      </span>
+      <span class="index-card">
+        <i></i><i></i>
+        <b>INDEX</b>
+      </span>
+    </div>
+
+    <span class="grid-cross grid-cross-left"></span>
+    <span class="grid-cross grid-cross-right"></span>
+  </div>
+</div>
+
+<style>
+  .archive-rule {
+    position: relative;
+    border-top: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+  }
+
+  .archive-scene {
+    position: absolute;
+    inset-inline: 1.5rem;
+    bottom: 0;
+    height: 72px;
+    max-width: 1180px;
+    margin-inline: auto;
+    color: var(--color-graphite);
+    pointer-events: none;
+  }
+
+  .archive-corner {
+    position: absolute;
+    bottom: 0;
+    width: 128px;
+    height: 70px;
+    opacity: 0.52;
+    font-family: var(--font-mono);
+    font-size: 6px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+  }
+
+  .archive-left {
+    left: 8px;
+  }
+
+  .archive-right {
+    right: 8px;
+  }
+
+  .archive-box {
+    position: absolute;
+    bottom: 0;
+    width: 49px;
+    height: 39px;
+    border: 1px solid currentColor;
+    background: var(--color-ground);
+  }
+
+  .archive-box::before,
+  .archive-box::after {
+    position: absolute;
+    content: '';
+    background: currentColor;
+    opacity: 0.55;
+  }
+
+  .archive-box::before {
+    top: 8px;
+    right: 0;
+    left: 0;
+    height: 1px;
+  }
+
+  .archive-box::after {
+    top: 0;
+    bottom: 0;
+    left: 7px;
+    width: 1px;
+    box-shadow: 33px 0 0 currentColor;
+  }
+
+  .box-back {
+    bottom: 26px;
+    left: 6px;
+  }
+
+  .box-front {
+    left: 40px;
+  }
+
+  .box-lid {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 53px;
+    height: 4px;
+    border: 1px solid currentColor;
+    background: var(--color-ground);
+  }
+
+  .box-handle {
+    position: absolute;
+    top: 13px;
+    left: 50%;
+    width: 12px;
+    height: 4px;
+    border: 1px solid currentColor;
+    translate: -50% 0;
+  }
+
+  .archive-box b {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    font: inherit;
+    translate: -50% 0;
+  }
+
+  .loose-sheet {
+    position: absolute;
+    right: 2px;
+    bottom: 7px;
+    width: 31px;
+    height: 42px;
+    border: 1px solid currentColor;
+    background: var(--color-ground);
+    transform: rotate(5deg);
+  }
+
+  .loose-sheet::after {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 8px;
+    height: 8px;
+    content: '';
+    border-bottom: 1px solid currentColor;
+    border-left: 1px solid currentColor;
+    background: var(--color-ground);
+  }
+
+  .loose-sheet i {
+    position: absolute;
+    left: 5px;
+    width: 14px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.58;
+  }
+
+  .loose-sheet i:nth-child(1) {
+    top: 12px;
+  }
+
+  .loose-sheet i:nth-child(2) {
+    top: 17px;
+    width: 19px;
+  }
+
+  .loose-sheet i:nth-child(3) {
+    top: 22px;
+    width: 11px;
+  }
+
+  .folder {
+    position: absolute;
+    right: 0;
+    width: 71px;
+    height: 28px;
+    border: 1px solid currentColor;
+    background: var(--color-ground);
+  }
+
+  .folder::before {
+    position: absolute;
+    top: 7px;
+    right: 6px;
+    left: 6px;
+    height: 1px;
+    content: '';
+    background: currentColor;
+    opacity: 0.55;
+  }
+
+  .folder b {
+    position: absolute;
+    right: 7px;
+    bottom: 5px;
+    font: inherit;
+  }
+
+  .folder-tab {
+    position: absolute;
+    top: -10px;
+    left: -1px;
+    min-width: 30px;
+    height: 10px;
+    padding: 2px 4px 0;
+    border: 1px solid currentColor;
+    border-bottom: 0;
+    background: var(--color-ground);
+    font: inherit;
+    font-style: normal;
+  }
+
+  .folder-back {
+    right: 18px;
+    bottom: 31px;
+  }
+
+  .folder-front {
+    bottom: 0;
+  }
+
+  .index-card {
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 43px;
+    height: 31px;
+    border: 1px solid currentColor;
+    background: var(--color-ground);
+    transform: rotate(-3deg);
+  }
+
+  .index-card i {
+    position: absolute;
+    right: 6px;
+    left: 6px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.55;
+  }
+
+  .index-card i:first-child {
+    top: 8px;
+  }
+
+  .index-card i:nth-child(2) {
+    top: 13px;
+  }
+
+  .index-card b {
+    position: absolute;
+    right: 6px;
+    bottom: 4px;
+    font: inherit;
+  }
+
+  .grid-cross {
+    position: absolute;
+    bottom: 0;
+    width: 9px;
+    height: 9px;
+    translate: -50% 50%;
+  }
+
+  .grid-cross::before,
+  .grid-cross::after {
+    position: absolute;
+    content: '';
+    background: color-mix(in srgb, var(--color-ink) 30%, transparent);
+  }
+
+  .grid-cross::before {
+    top: 4px;
+    left: 0;
+    width: 9px;
+    height: 1px;
+  }
+
+  .grid-cross::after {
+    top: 0;
+    left: 4px;
+    width: 1px;
+    height: 9px;
+  }
+
+  .grid-cross-left {
+    left: 0;
+  }
+
+  .grid-cross-right {
+    left: 100%;
+  }
+
+  @media (max-width: 639px) {
+    .archive-scene {
+      height: 62px;
+    }
+
+    .archive-corner {
+      transform: scale(0.84);
+    }
+
+    .archive-left {
+      transform-origin: bottom left;
+    }
+
+    .archive-right {
+      transform-origin: bottom right;
+    }
+  }
+</style>

@@ -20,8 +20,8 @@
  * no depende del dibujo: funciona con cualquier silueta.
  * ────────────────────────────────────────────────────────────────────────────
  *
- * Mientras tanto, lo de aquí abajo genera las siluetas por geometría. Se calcula
- * al compilar, así que en el navegador solo queda SVG plano.
+ * Las siluetas se generan por geometría al compilar. Las copas usan pocas hojas
+ * largas y lisas para conservar su forma cuando se reducen en el footer.
  */
 
 export interface PalmArtwork {
@@ -57,20 +57,19 @@ interface PalmShape {
 /** Se dibujan grandes y se reducen al colocarlas: así los enteros bastan para
  *  las coordenadas y cada `d` ocupa la mitad. */
 const SHAPES: PalmShape[] = [
-  { id: 'palm-a', h: 150, bend: -14, fronds: 8, leaf: 62, coco: true },
-  { id: 'palm-b', h: 186, bend: 20, fronds: 9, leaf: 72, coco: false },
-  { id: 'palm-c', h: 118, bend: -9, fronds: 7, leaf: 54, coco: true },
+  { id: 'palm-a', h: 152, bend: -13, fronds: 5, leaf: 70, coco: true },
+  { id: 'palm-b', h: 178, bend: 18, fronds: 6, leaf: 78, coco: false },
+  { id: 'palm-c', h: 120, bend: -8, fronds: 5, leaf: 62, coco: true },
 ];
 
 /** Reparto de las hojas alrededor de la vertical, en grados. */
 const FROND_ANGLES: Record<number, number[]> = {
-  7: [-84, -60, -34, 0, 34, 60, 84],
-  8: [-86, -66, -44, -16, 16, 44, 66, 86],
-  9: [-88, -68, -46, -22, 0, 22, 46, 68, 88],
+  5: [-74, -38, 0, 38, 74],
+  6: [-78, -48, -17, 17, 48, 78],
 };
 
 /** Muestras a lo largo de cada nervadura. */
-const SAMPLES = 11;
+const SAMPLES = 8;
 
 const r = (n: number) => Math.round(n);
 
@@ -92,26 +91,23 @@ function normalAt(p0: Point, c: Point, p2: Point, t: number): Point {
 }
 
 /**
- * Una hoja pinnada: silueta rellena con el borde dentado.
- *
- * La anchura nace en cero, alcanza el máximo pasada la mitad y vuelve a cero en
- * la punta. El dentado alterna entre anchura llena y recortada, desfasado entre
- * los dos lados para que ninguna hoja salga simétrica.
+ * Hoja larga y limpia. La nervadura se curva hacia arriba y la punta cae un
+ * poco; el ancho crece de forma continua y vuelve a cerrarse sin dentado.
  */
 function frondPath(angleDeg: number, baseLength: number): string {
   const a = (angleDeg * Math.PI) / 180;
   const sin = Math.sin(a);
   const cos = Math.cos(a);
 
-  const length = baseLength * (0.84 + 0.3 * Math.abs(sin));
-  const droop = 0.62 * length * Math.abs(sin);
-  const maxWidth = length * 0.17;
+  const length = baseLength * (0.88 + 0.22 * Math.abs(sin));
+  const droop = 0.48 * length * Math.abs(sin);
+  const maxWidth = length * 0.105;
 
   const p0: Point = { x: 0, y: 0 };
   const p2: Point = { x: length * sin, y: -length * cos + droop };
-  const c: Point = { x: 0.5 * length * sin, y: -0.9 * length * cos };
+  const c: Point = { x: 0.46 * length * sin, y: -0.74 * length * cos };
 
-  const width = (t: number) => maxWidth * Math.sin(Math.PI * Math.pow(t, 1.25));
+  const width = (t: number) => maxWidth * Math.sin(Math.PI * Math.pow(t, 1.12));
 
   const left: string[] = [];
   const right: string[] = [];
@@ -122,11 +118,8 @@ function frondPath(angleDeg: number, baseLength: number): string {
     const n = normalAt(p0, c, p2, t);
     const w = width(t);
 
-    const wl = w * (i % 2 === 0 ? 1 : 0.42);
-    const wr = w * (i % 2 === 0 ? 0.42 : 1);
-
-    left.push(`L${r(p.x + n.x * wl)} ${r(p.y + n.y * wl)}`);
-    right.unshift(`L${r(p.x - n.x * wr)} ${r(p.y - n.y * wr)}`);
+    left.push(`L${r(p.x + n.x * w)} ${r(p.y + n.y * w)}`);
+    right.unshift(`L${r(p.x - n.x * w * 0.9)} ${r(p.y - n.y * w * 0.9)}`);
   }
 
   return `M0 0${left.join('')}L${r(p2.x)} ${r(p2.y)}${right.join('')}Z`;
@@ -138,8 +131,8 @@ function trunkPath(height: number, bend: number): string {
   const p2: Point = { x: 0, y: -height };
   const c: Point = { x: bend, y: -height / 2 };
 
-  const baseWidth = 6;
-  const topWidth = 2.4;
+  const baseWidth = 5;
+  const topWidth = 2;
 
   const up: string[] = [];
   const down: string[] = [];
@@ -160,12 +153,11 @@ function trunkPath(height: number, bend: number): string {
 export const PALM_ARTWORK: PalmArtwork[] = SHAPES.map((shape) => {
   const crown = shape.leaf * 1.15;
 
-  const circles = [{ cx: 0, cy: -shape.h, r: 5 }];
+  const circles = [{ cx: 0, cy: -shape.h, r: 3.5 }];
   if (shape.coco) {
     circles.push(
-      { cx: -7, cy: -shape.h + 9, r: 5 },
-      { cx: 7, cy: -shape.h + 9, r: 5 },
-      { cx: 0, cy: -shape.h + 15, r: 5 }
+      { cx: -5, cy: -shape.h + 8, r: 3.8 },
+      { cx: 5, cy: -shape.h + 8, r: 3.8 }
     );
   }
 

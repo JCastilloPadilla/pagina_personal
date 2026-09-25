@@ -1,6 +1,7 @@
 ---
 import { featured } from '../data/site';
 import MedalHook from './MedalHook.astro';
+import NetworkTopology from './NetworkTopology.astro';
 import SectionHeading from './SectionHeading.astro';
 ---
 
@@ -9,7 +10,7 @@ import SectionHeading from './SectionHeading.astro';
     más arriba y abajo; eso basta para que se lea como la pieza principal. */}
 <section id="proyectos">
   <div class="mx-auto max-w-[1180px] px-6 py-28 sm:px-8 lg:py-40">
-    <SectionHeading label="Proyecto principal">
+    <SectionHeading label="Proyecto principal" index="02 / 04">
       <Fragment slot="meta">
         {
           featured.awards.map((award) => (
@@ -46,6 +47,8 @@ import SectionHeading from './SectionHeading.astro';
             featured.links.map((link) => (
               <a
                 href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
                 class:list={['u-btn', link.variant === 'solid' ? 'u-btn-solid' : 'u-btn-line']}
               >
                 {link.label}
@@ -70,26 +73,7 @@ import SectionHeading from './SectionHeading.astro';
         </ul>
       </div>
 
-      <div>
-        {
-          featured.image ? (
-            <img
-              src={featured.image}
-              alt={featured.imageAlt}
-              class="w-full rounded-[3px] border border-ink/12"
-              loading="lazy"
-            />
-          ) : (
-            <div
-              role="img"
-              aria-label={featured.imageAlt}
-              class="flex aspect-[4/3] w-full items-center justify-center rounded-[3px] border border-dashed border-ink/20 bg-panel/60"
-            >
-              <span class="u-label px-6 text-center text-graphite">{featured.imageAlt}</span>
-            </div>
-          )
-        }
-      </div>
+      <NetworkTopology />
     </div>
   </div>
 </section>

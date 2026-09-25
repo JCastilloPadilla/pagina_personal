@@ -1,0 +1,220 @@
+<div aria-hidden="true" class="inventory-rule">
+  <div class="inventory-scene">
+    <div class="tag-stack tag-stack-left">
+      <span class="inventory-tag tag-back">
+        <i class="tag-hole"></i>
+        <b>EQUIPO 03</b>
+        <small>IP 10.0.0.31</small>
+      </span>
+      <span class="inventory-tag tag-front">
+        <i class="tag-hole"></i>
+        <b>EQUIPO 01</b>
+        <small>IP 192.168.1.24</small>
+        <code>MAC 3C:52:82:A1:0F:7B</code>
+      </span>
+    </div>
+
+    <div class="tag-stack tag-stack-right">
+      <span class="inventory-tag tag-back">
+        <i class="tag-hole"></i>
+        <b>EQUIPO 04</b>
+        <small>IP 10.0.0.44</small>
+      </span>
+      <span class="inventory-tag tag-front">
+        <i class="tag-hole"></i>
+        <b>EQUIPO 02</b>
+        <small>IP 192.168.1.18</small>
+        <code>MAC 70:85:C2:4D:91:AE</code>
+      </span>
+    </div>
+
+    <span class="grid-cross grid-cross-left"></span>
+    <span class="grid-cross grid-cross-right"></span>
+  </div>
+</div>
+
+<style>
+  .inventory-rule {
+    position: relative;
+    border-top: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+  }
+
+  .inventory-scene {
+    position: absolute;
+    inset-inline: 1.5rem;
+    bottom: 0;
+    height: 76px;
+    max-width: 1180px;
+    margin-inline: auto;
+    color: var(--color-graphite);
+    pointer-events: none;
+  }
+
+  .tag-stack {
+    position: absolute;
+    bottom: 0;
+    width: 158px;
+    height: 72px;
+    opacity: 0.54;
+  }
+
+  .tag-stack-left {
+    left: 8px;
+  }
+
+  .tag-stack-right {
+    right: 8px;
+  }
+
+  .inventory-tag {
+    position: absolute;
+    display: grid;
+    box-sizing: border-box;
+    width: 145px;
+    height: 53px;
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 3px;
+    padding: 7px 10px 7px 22px;
+    border: 1px solid currentColor;
+    background: var(--color-ground);
+    font-family: var(--font-mono);
+    line-height: 1;
+  }
+
+  .inventory-tag::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 14px;
+    width: 1px;
+    content: '';
+    background: currentColor;
+    opacity: 0.45;
+  }
+
+  .inventory-tag::after {
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+    width: 18px;
+    height: 4px;
+    content: '';
+    border-top: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    opacity: 0.38;
+  }
+
+  .tag-back {
+    top: 0;
+    width: 117px;
+    height: 42px;
+    opacity: 0.58;
+    transform: rotate(-2deg);
+  }
+
+  .tag-front {
+    right: 0;
+    bottom: 0;
+  }
+
+  .tag-stack-right .tag-back {
+    right: 0;
+    transform: rotate(2deg);
+  }
+
+  .tag-stack-right .tag-front {
+    right: auto;
+    left: 0;
+  }
+
+  .inventory-tag b,
+  .inventory-tag small,
+  .inventory-tag code {
+    overflow: hidden;
+    font: inherit;
+    white-space: nowrap;
+  }
+
+  .inventory-tag b {
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+  }
+
+  .inventory-tag small,
+  .inventory-tag code {
+    font-size: 6px;
+    letter-spacing: 0.08em;
+  }
+
+  .inventory-tag code {
+    color: var(--color-ink);
+  }
+
+  .tag-hole {
+    position: absolute;
+    top: 8px;
+    left: 5px;
+    width: 5px;
+    height: 5px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    background: var(--color-ground);
+  }
+
+  .grid-cross {
+    position: absolute;
+    bottom: 0;
+    width: 9px;
+    height: 9px;
+    translate: -50% 50%;
+  }
+
+  .grid-cross::before,
+  .grid-cross::after {
+    position: absolute;
+    content: '';
+    background: color-mix(in srgb, var(--color-ink) 30%, transparent);
+  }
+
+  .grid-cross::before {
+    top: 4px;
+    left: 0;
+    width: 9px;
+    height: 1px;
+  }
+
+  .grid-cross::after {
+    top: 0;
+    left: 4px;
+    width: 1px;
+    height: 9px;
+  }
+
+  .grid-cross-left {
+    left: 0;
+  }
+
+  .grid-cross-right {
+    left: 100%;
+  }
+
+  @media (max-width: 639px) {
+    .inventory-scene {
+      height: 62px;
+    }
+
+    .tag-stack {
+      transform: scale(0.78);
+    }
+
+    .tag-stack-left {
+      transform-origin: bottom left;
+    }
+
+    .tag-stack-right {
+      transform-origin: bottom right;
+    }
+  }
+</style>

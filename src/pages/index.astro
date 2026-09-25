@@ -7,30 +7,34 @@ import Featured from '../components/Featured.astro';
 import Work from '../components/Work.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-import SectionRule from '../components/SectionRule.astro';
+import ArchiveRule from '../components/ArchiveRule.astro';
+import InventoryRule from '../components/InventoryRule.astro';
+import UtilityRule from '../components/UtilityRule.astro';
+import SocialRail from '../components/SocialRail.astro';
 import GameModal from '../components/GameModal.astro';
-import LoginModal from '../components/LoginModal.astro';
 ---
 
 <BaseLayout>
+  {/* Los dos elementos fijos van al nivel de la página, no dentro del hero:
+      así siguen el scroll de principio a fin. */}
   <Nav />
+  <SocialRail />
 
   {/* Las secciones se separan con filetes, no con bloques de color. */}
   <main>
     <Hero />
     <About />
-    <SectionRule />
+    <UtilityRule />
     <Featured />
-    <SectionRule />
+    <InventoryRule />
     <Work />
-    <SectionRule />
+    <ArchiveRule />
     <Contact />
   </main>
 
   <Footer />
 
   <GameModal />
-  <LoginModal />
 </BaseLayout>
 
 <script>

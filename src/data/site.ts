@@ -27,13 +27,18 @@ export interface Award {
   tone: 'silver' | 'bronze';
 }
 
+export interface ProjectVisual {
+  label: string;
+  alt: string;
+  src?: string;
+}
+
 export interface FeaturedProject {
   title: string;
   statement: string;
   summary: string;
   tags: string[];
-  image?: string;
-  imageAlt: string;
+  visuals: ProjectVisual[];
   awards: Award[];
   links: { label: string; href: string; variant: 'solid' | 'line' }[];
 }
@@ -59,13 +64,12 @@ export interface NavItem {
 export const profile: Profile = {
   name: 'Jose Carlos Castillo Padilla',
   place: 'Mazatlán, Sinaloa · Facultad de Informática UAS',
-  tagline:
-    'Estudiante de Ingeniería en Sistemas de la Información. Construyo herramientas de redes y automatización.',
+  tagline: 'Redes, sistemas y automatización en práctica.',
   lead: 'Me interesa cómo viaja la información y qué se rompe en el camino.',
   bio: [
-    'Estoy en último año en la Facultad de Informática Mazatlán (UAS) y me muevo casi siempre alrededor de lo mismo: redes, sistemas y seguridad.',
+    'Estoy en último año en la Facultad de Informática Mazatlán (UAS) y mis áreas de mayor interés son: redes, sistemas y seguridad.',
     'Aprendo construyendo. Casi todo lo que sé salió de proyectos propios: monitoreo de protocolos, agentes de escritorio, automatizaciones que me quitan trabajo repetitivo. Uso herramientas de IA como copiloto para avanzar más rápido y meterme en terreno nuevo sin miedo.',
-    'Fuera del código: café, arcade retro y desarmar cosas para ver por dónde van los cables.',
+    'Fuera del código: café, netflix y desarmar cosas para ver cómo funcionan.',
   ],
 };
 
@@ -76,30 +80,46 @@ export const nav: NavItem[] = [
   { label: 'Contacto', href: '#contacto' },
 ];
 
-/** Las mismas herramientas de siempre, agrupadas por para qué sirven. */
+/** Tecnologías resumidas desde el README público de GitHub. */
 export const stackGroups: StackGroup[] = [
-  { label: 'Redes', items: ['SNMP', 'Wireshark'] },
-  { label: 'Sistemas', items: ['Linux', 'Docker'] },
-  { label: 'Código', items: ['C#', 'Python', 'PHP', 'JavaScript'] },
-  { label: 'Datos', items: ['MySQL'] },
-  { label: 'Flujo', items: ['Git'] },
+  { label: 'Lenguajes', items: ['HTML', 'CSS', 'JavaScript', 'PHP', 'Dart'] },
+  { label: 'Herramientas', items: ['Apache', 'Git', 'MySQL', 'Debian'] },
 ];
 
 export const featured: FeaturedProject = {
-  title: 'FlowTrix',
-  statement: 'Ver lo que de verdad pasa en la red.',
-  summary:
-    'Plataforma de monitoreo de protocolos de red. Un dashboard web concentra el tráfico y un agente de Windows en C# reporta desde cada equipo: alertas, histórico y visibilidad de punta a punta.',
-  tags: ['Dashboard web', 'Agente C#', 'SNMP / Netflow'],
-  imageAlt: 'Captura del dashboard de FlowTrix',
+    title: 'FlowTrix',
+    statement: 'Ver lo que de verdad pasa en la red.',
+    summary:
+      'Plataforma de monitoreo de red ya desplegada y en funcionamiento. Su dashboard web concentra la actividad, mientras un agente instalado en cada equipo envía telemetría para generar alertas, conservar históricos y ofrecer visibilidad de punta a punta.',
+    tags: ['Dashboard web', 'Agente'],
+  visuals: [
+      {
+        label: 'Vista general',
+        alt: 'Vista general del dashboard de FlowTrix',
+        src: '/images/flowtrix/flowtrix-overview.png',
+      },
+      {
+        label: 'Alertas',
+        alt: 'Panel de alertas de FlowTrix',
+        src: '/images/flowtrix/flowtrix-alerts.png',
+      },
+      {
+        label: 'Agente Windows',
+        alt: 'Instalador del agente de Windows de FlowTrix',
+        src: '/images/flowtrix/flowtrix-windows-agent.png',
+      },
+  ],
   awards: [
     { medal: 'Plata', place: 'Infomatrix Regional Pacífico', tone: 'silver' },
     { medal: 'Bronce', place: 'Infomatrix Nacional México', tone: 'bronze' },
-  ],
-  links: [
-    { label: 'Repositorio', href: '#', variant: 'solid' },
-    { label: 'Ver demo', href: '#', variant: 'line' },
-  ],
+    ],
+    links: [
+      {
+        label: 'Visitar FlowTrix',
+        href: 'https://flowtrix.fimaz.uas.edu.mx/',
+        variant: 'solid',
+      },
+    ],
 };
 
 export const work: WorkItem[] = [
@@ -111,17 +131,16 @@ export const work: WorkItem[] = [
     href: '#',
   },
   {
-    title: 'Laboratorio de redes',
+    title: 'Generador de códigos QR',
     summary:
-      'Entorno de práctica con máquinas virtuales para probar segmentación, VLANs y monitoreo antes de tocar producción.',
-    meta: 'VLANs · Máquinas virtuales',
-    href: '#',
+      'Aplicación web que transforma texto y enlaces en códigos QR listos para descargar directamente desde el navegador.',
+    meta: 'TypeScript · Web',
   },
 ];
 
 export const contactIntro = 'Abierto a prácticas, proyectos y charlas sobre redes.';
 
-export const email = 'hola@ccastillo.me';
+export const email = 'joosec29@gmail.com';
 
 export const socials: ContactLink[] = [
   {
@@ -143,7 +162,7 @@ export const socials: ContactLink[] = [
 
 /** Esquinas del pie: procedencia a la izquierda, apunte personal a la derecha. */
 export const origin = 'Hecho en Mazatlán, Sinaloa';
-export const footerNote = 'Café, arcade retro y cables por desarmar';
+export const footerNote = 'Café, netflix y cosas por armar';
 
 export const site = {
   domain: 'ccastillo.me',

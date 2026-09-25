@@ -1,0 +1,162 @@
+---
+/** Perfil corto que recuerda una lectura de tráfico o una señal de radio. */
+const LEVELS = [3, 6, 10, 5, 14, 8, 12, 5, 9, 4];
+---
+
+<span class="signal-signature" data-signal-signature aria-hidden="true">
+  <span class="signal-track">
+    {
+      LEVELS.map((level, index) => (
+        <span
+          class="signal-mark"
+          style={`--level: ${level}px; --delay: ${index * 65}ms`}
+        ></span>
+      ))
+    }
+    <span class="signal-packet"></span>
+  </span>
+  <span class="initials">JCCP</span>
+</span>
+
+<style>
+  .signal-signature {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--color-graphite);
+    cursor: default;
+    transition: color 180ms ease;
+  }
+
+  .signal-track {
+    position: relative;
+    display: inline-flex;
+    width: 48px;
+    height: 18px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .signal-track::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.28;
+  }
+
+  .signal-mark {
+    position: relative;
+    z-index: 1;
+    width: 2px;
+    height: var(--level);
+    border-radius: 1px;
+    background: currentColor;
+    opacity: 0.48;
+    transform: scaleY(0.72);
+  }
+
+  .signal-packet {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: -1px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-up);
+    box-shadow: 0 0 5px color-mix(in srgb, var(--color-up) 60%, transparent);
+    opacity: 0;
+    translate: 0 -50%;
+  }
+
+  .initials {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+  }
+
+  .signal-signature.is-playing {
+    color: var(--color-link);
+  }
+
+  .signal-signature.is-playing .signal-mark {
+    animation: signature-pulse 620ms ease-in-out var(--delay) 1 both;
+  }
+
+  .signal-signature.is-playing .signal-packet {
+    animation: signature-travel 1.28s cubic-bezier(0.22, 1, 0.36, 1) 1 both;
+  }
+
+  @keyframes signature-pulse {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: scaleY(0.55);
+    }
+    48% {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes signature-travel {
+    0% {
+      opacity: 0;
+      transform: translateX(0);
+    }
+    10%,
+    82% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(47px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .signal-signature,
+    .signal-signature.is-playing .signal-mark,
+    .signal-signature.is-playing .signal-packet {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  document.querySelectorAll<HTMLElement>('[data-signal-signature]').forEach((signature) => {
+    const packet = signature.querySelector<HTMLElement>('.signal-packet');
+    if (!packet) return;
+
+    const play = () => {
+      if (reducedMotion.matches) return;
+
+      signature.classList.remove('is-playing');
+      void signature.offsetWidth;
+      signature.classList.add('is-playing');
+    };
+
+    signature.addEventListener('pointerenter', play);
+
+    packet.addEventListener('animationend', () => {
+      signature.classList.remove('is-playing');
+    });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) play();
+      },
+      { threshold: 0.6 },
+    );
+
+    observer.observe(signature);
+  });
+</script>

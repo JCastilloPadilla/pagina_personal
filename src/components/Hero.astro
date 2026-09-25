@@ -1,14 +1,13 @@
 ---
 import { profile } from '../data/site';
 import HeroWarp from './HeroWarp';
-import SocialRail from './SocialRail.astro';
 ---
 
 {/* Capas del hero, de atrás hacia adelante:
     -z-30  campo de color animado (Paper Shaders)
     -z-10  velos que calman el fondo bajo el texto
      auto  contenido */}
-<section id="inicio" class="relative isolate flex min-h-[88vh] flex-col">
+<section id="inicio" class="relative isolate flex flex-col sm:min-h-[88vh]">
   {/* `client:only` y no `client:load`: el componente monta un canvas WebGL, que
       no existe al renderizar en el servidor. Así se salta el paso de SSR en vez
       de generar un marcado que habría que hidratar y reemplazar.
@@ -32,11 +31,10 @@ import SocialRail from './SocialRail.astro';
   >
   </div>
 
-  <SocialRail />
-
-  {/* pt mayor que pb: deja aire bajo la píldora fija en ventanas cortas. */}
+  {/* En móvil fluye desde arriba para que la franja de estado no quede cortada.
+      Desde sm recupera el centrado vertical de la composición amplia. */}
   <div
-    class="mx-auto flex w-full max-w-[1180px] flex-1 flex-col justify-center px-6 pt-32 pb-20 sm:px-8"
+    class="mx-auto flex w-full max-w-[1180px] flex-col px-6 pt-28 pb-12 sm:flex-1 sm:justify-center sm:pt-32 sm:pb-20 sm:px-8"
   >
     {/* En el hero el fondo es un campo de color vivo, no papel plano: el texto
         secundario sube de `graphite` a `ink/80`. Sobre el azul más oscuro de la
@@ -61,7 +59,7 @@ import SocialRail from './SocialRail.astro';
 
     <div class="u-rise mt-10 flex flex-wrap items-center gap-3" style="animation-delay: 320ms">
       <a href="#proyectos" class="u-btn u-btn-solid">
-        Ver FlowTrix
+        Ver proyectos
         <span aria-hidden="true">→</span>
       </a>
       <a href="#contacto" class="u-btn u-btn-line">Escríbeme</a>
@@ -71,7 +69,7 @@ import SocialRail from './SocialRail.astro';
   {/* Franja de estado, como la barra inferior de un panel de monitoreo. */}
   <div class="u-rise border-t border-ink/12" style="animation-delay: 420ms">
     <div
-      class="mx-auto flex w-full max-w-[1180px] flex-wrap items-center gap-x-8 gap-y-2 px-6 py-4 sm:px-8"
+      class="mx-auto grid w-full max-w-[1180px] gap-2 px-6 py-4 sm:flex sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-2 sm:px-8"
     >
       <p class="u-label flex items-center gap-2.5 text-ink">
         <span class="u-dot" aria-hidden="true"></span>

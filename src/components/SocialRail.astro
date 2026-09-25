@@ -3,18 +3,19 @@ import { socials } from '../data/site';
 import { SOCIAL_ICON_PATHS } from '../data/icons';
 
 /**
- * Riel del margen izquierdo: un filete vertical que baja desde el borde
- * superior de la página y, en el mismo eje, los enlaces sociales.
+ * Riel del margen izquierdo: un filete vertical y, en el mismo eje, los enlaces
+ * sociales.
  *
- * Vive dentro del hero, no fijo a la ventana: más abajo la página tiene la
- * banda oscura de FlowTrix, y unos iconos en tinta oscura desaparecerían sobre
- * ella. Los mismos enlaces están completos en la sección de contacto.
+ * Va fijo a la ventana, así que acompaña al scroll igual que la firma del
+ * encabezado. Antes no podía: la sección de FlowTrix era una banda azul marino
+ * y estos iconos en tinta se habrían perdido encima. Ahora la página es clara
+ * de arriba abajo, y el bloque azul del pie queda muy a la derecha del riel.
  */
 ---
 
 {/* Solo a partir de xl: por debajo de ~1280 px el riel se metería dentro del
     contenedor de 1180 px y chocaría con el texto. */}
-<div class="absolute top-0 left-6 z-20 hidden flex-col items-center pt-16 xl:flex">
+<div class="fixed top-0 left-6 z-30 hidden flex-col items-center pt-16 xl:flex">
   {/* Arranca justo bajo la barra del encabezado, no debajo de ella. */}
   <span aria-hidden="true" class="h-44 w-px bg-ink/25"></span>
 
