@@ -46,8 +46,6 @@ test('la navegación y la franja de estado tienen una composición móvil explí
 
   assert.doesNotMatch(nav, /overflow-x-auto/);
   assert.match(nav, /flex-1 min-w-0/);
-  assert.doesNotMatch(hero, /min-h-\[100svh\]/);
-  assert.match(hero, /flex flex-col sm:min-h-\[88vh\]/);
   assert.match(hero, /grid w-full[^\"]*gap-2[^\"]*sm:flex/);
   assert.match(hero, /sm:flex-1 sm:justify-center/);
 });

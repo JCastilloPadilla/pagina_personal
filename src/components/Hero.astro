@@ -6,7 +6,7 @@ import { profile } from '../data/site';
     -z-30  ilustración editorial estática
     -z-10  velos que calman el fondo bajo el texto
      auto  contenido */}
-<section id="inicio" class="relative isolate flex flex-col sm:min-h-[88vh]">
+<section id="inicio" class="relative isolate flex min-h-[100svh] flex-col">
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-30 overflow-hidden">
     <img
       src="/images/hero-ink-coast.png"
@@ -28,12 +28,12 @@ import { profile } from '../data/site';
   {/* Fundido inferior: el hero entra en el resto de la página sin costura. */}
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48 bg-[linear-gradient(to_bottom,transparent,var(--color-ground))]"
+    class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-16 bg-[linear-gradient(to_bottom,transparent,var(--color-ground))]"
   >
   </div>
 
-  {/* En móvil fluye desde arriba para que la franja de estado no quede cortada.
-      Desde sm recupera el centrado vertical de la composición amplia. */}
+  {/* El contenido móvil sigue arriba; la ilustración completa el primer viewport.
+      En escritorio la presentación se centra verticalmente. */}
   <div
     class="mx-auto flex w-full max-w-[1180px] flex-col px-6 pt-28 pb-12 sm:flex-1 sm:justify-center sm:pt-32 sm:pb-20 sm:px-8"
   >
@@ -65,7 +65,9 @@ import { profile } from '../data/site';
     </div>
   </div>
 
-  {/* Franja de estado, como la barra inferior de un panel de monitoreo. */}
+</section>
+
+  {/* La franja aparece después del primer viewport, al comenzar a desplazarse. */}
   <div class="u-rise border-t border-ink/12" style="animation-delay: 420ms">
     <div
       class="mx-auto grid w-full max-w-[1180px] gap-2 px-6 py-4 sm:flex sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-2 sm:px-8"
@@ -78,4 +80,3 @@ import { profile } from '../data/site';
       <p class="u-label text-ink/80 sm:ml-auto">Abierto a prácticas</p>
     </div>
   </div>
-</section>
