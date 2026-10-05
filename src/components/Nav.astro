@@ -5,10 +5,8 @@ import { nav, site } from '../data/site';
 {/* Sin barra: las piezas flotan sobre el fondo. El contenedor no pinta nada y
     deja pasar los clics; solo las piezas son sensibles.
 
-    El velo va en cada cajita, no en una barra. Sobre el fondo plano del sitio
-    es del mismo color que la página, así que se ven flotando; sobre el shader
-    del hero y sobre la banda oscura de FlowTrix se recortan solas y mantienen
-    el texto legible (8.3:1 en el peor caso). */}
+    Cada opción tiene un velo ligero que deja ver la ilustración. Al pasar el
+    cursor o enfocar con el teclado gana un poco de contraste. */}
 <header
   class="pointer-events-none fixed inset-x-0 top-0 z-40 flex items-center justify-between gap-2 px-4 py-4 sm:gap-4 sm:px-8"
 >
@@ -39,7 +37,7 @@ import { nav, site } from '../data/site';
                 lista está anclada a la derecha, el crecimiento va hacia allá. */}
             <a
               href={item.href}
-              class="group flex shrink-0 items-center justify-center gap-1 bg-ground/70 px-1.5 py-1.5 font-mono text-[11px] whitespace-nowrap text-ink backdrop-blur-md transition-[gap,padding] duration-300 ease-out sm:gap-1.5 sm:px-2.5 sm:text-[13px] sm:hover:gap-3 sm:hover:px-4"
+              class="group flex shrink-0 items-center justify-center gap-1 bg-ground/30 px-1.5 py-1.5 font-mono text-[11px] whitespace-nowrap text-ink backdrop-blur-[2px] transition-[gap,padding,background-color] duration-300 ease-out hover:bg-ground/50 focus-visible:bg-ground/50 sm:gap-1.5 sm:px-2.5 sm:text-[13px] sm:hover:gap-3 sm:hover:px-4"
             >
               <span class="text-ink/35 transition-colors group-hover:text-link">[</span>
               {item.label}
