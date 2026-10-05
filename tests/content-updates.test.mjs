@@ -58,11 +58,11 @@ test('el pie reserva espacio móvil para el jardín sin invadir sus leyendas', a
   assert.match(footer, /px-6 pb-20 sm:px-8 sm:pb-4/);
 });
 
-test('el hero usa una ilustración urbana estática en vez del shader animado', async () => {
+test('el hero usa una ilustración costera en tinta estática en vez del shader animado', async () => {
   const hero = await read('src/components/Hero.astro');
 
   assert.doesNotMatch(hero, /HeroWarp/);
-  assert.match(hero, /\/images\/hero-watercolor-city\.png/);
+  assert.match(hero, /\/images\/hero-ink-coast\.png/);
   assert.match(hero, /alt=""/);
   assert.match(hero, /pointer-events-none absolute inset-0 -z-30/);
   assert.doesNotMatch(hero, /import portrait from/);
