@@ -9,16 +9,19 @@ import { profile } from '../data/site';
 <section id="inicio" class="relative isolate flex flex-col sm:min-h-[88vh]">
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-30 overflow-hidden">
     <img
-      src="/images/hero-coastal-network.png"
+      src="/images/hero-watercolor-city.png"
       alt=""
-      class="h-full w-full object-cover object-[64%_center] sm:object-center"
+      width="1672"
+      height="941"
+      fetchpriority="high"
+      class="h-full w-full object-cover object-[48%_center] sm:object-center"
     />
   </div>
 
   {/* Velo lateral: conserva la zona de lectura del titular sobre la ilustración. */}
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(100deg,color-mix(in_srgb,var(--color-ground)_64%,transparent)_0%,color-mix(in_srgb,var(--color-ground)_48%,transparent)_42%,color-mix(in_srgb,var(--color-ground)_28%,transparent)_72%,color-mix(in_srgb,var(--color-ground)_18%,transparent)_100%)]"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(100deg,color-mix(in_srgb,var(--color-ground)_28%,transparent)_0%,color-mix(in_srgb,var(--color-ground)_16%,transparent)_48%,transparent_78%)]"
   >
   </div>
 
@@ -34,9 +37,7 @@ import { profile } from '../data/site';
   <div
     class="mx-auto flex w-full max-w-[1180px] flex-col px-6 pt-28 pb-12 sm:flex-1 sm:justify-center sm:pt-32 sm:pb-20 sm:px-8"
   >
-    {/* En el hero el fondo es un campo de color vivo, no papel plano: el texto
-        secundario sube de `graphite` a `ink/80`. Sobre el azul más oscuro de la
-        paleta, `graphite` se queda en 2.97:1 y reprueba AA; así llega a 6:1. */}
+    {/* Tinta oscura sobre el cielo claro de la acuarela. */}
     <p class="u-rise u-label text-ink/80" style="animation-delay: 60ms">
       {profile.place}
     </p>
