@@ -58,9 +58,13 @@ test('el pie reserva espacio móvil para el jardín sin invadir sus leyendas', a
   assert.match(footer, /px-6 pb-20 sm:px-8 sm:pb-4/);
 });
 
-test('el hero conserva la presentación original sin retrato personal', async () => {
+test('el hero usa una ilustración costera estática en vez del shader animado', async () => {
   const hero = await read('src/components/Hero.astro');
 
+  assert.doesNotMatch(hero, /HeroWarp/);
+  assert.match(hero, /\/images\/hero-coastal-network\.png/);
+  assert.match(hero, /alt=""/);
+  assert.match(hero, /pointer-events-none absolute inset-0 -z-30/);
   assert.doesNotMatch(hero, /import portrait from/);
   assert.doesNotMatch(hero, /data-hero-portrait/);
   assert.match(hero, /<p class="u-rise u-label text-ink\/80" style="animation-delay: 60ms">\s*\{profile\.place\}/);

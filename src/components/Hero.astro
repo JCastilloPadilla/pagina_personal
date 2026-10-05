@@ -1,23 +1,21 @@
 ---
 import { profile } from '../data/site';
-import HeroWarp from './HeroWarp';
 ---
 
 {/* Capas del hero, de atrás hacia adelante:
-    -z-30  campo de color animado (Paper Shaders)
+    -z-30  ilustración editorial estática
     -z-10  velos que calman el fondo bajo el texto
      auto  contenido */}
 <section id="inicio" class="relative isolate flex flex-col sm:min-h-[88vh]">
-  {/* `client:only` y no `client:load`: el componente monta un canvas WebGL, que
-      no existe al renderizar en el servidor. Así se salta el paso de SSR en vez
-      de generar un marcado que habría que hidratar y reemplazar.
-      `pointer-events-none` deja pasar los clics a los botones del hero. */}
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-30 overflow-hidden">
-    <HeroWarp client:only="react" />
+    <img
+      src="/images/hero-coastal-network.png"
+      alt=""
+      class="h-full w-full object-cover object-[64%_center] sm:object-center"
+    />
   </div>
 
-  {/* Velo lateral: deja ver el campo de color en todo el hero, pero lo apaga
-      donde va el titular. */}
+  {/* Velo lateral: conserva la zona de lectura del titular sobre la ilustración. */}
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(100deg,color-mix(in_srgb,var(--color-ground)_64%,transparent)_0%,color-mix(in_srgb,var(--color-ground)_48%,transparent)_42%,color-mix(in_srgb,var(--color-ground)_28%,transparent)_72%,color-mix(in_srgb,var(--color-ground)_18%,transparent)_100%)]"

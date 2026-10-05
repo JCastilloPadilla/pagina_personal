@@ -2,8 +2,6 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
-import react from '@astrojs/react';
-
 export default defineConfig({
   site: 'https://ccastillo.me',
   output: 'static',
@@ -28,5 +26,4 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [react()],
 });
