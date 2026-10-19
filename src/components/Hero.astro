@@ -8,14 +8,21 @@ import { profile } from '../data/site';
      auto  contenido */}
 <section id="inicio" class="relative isolate flex min-h-[100svh] flex-col">
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-30 overflow-hidden">
-    <img
-      src="/images/hero-ink-coast.png"
-      alt=""
-      width="1672"
-      height="941"
-      fetchpriority="high"
-      class="h-full w-full object-cover object-[48%_center] sm:object-center"
-    />
+    <picture class="block h-full w-full">
+      <source
+        media="(max-width: 639px)"
+        srcset="/images/hero-ink-coast-mobile.webp"
+        type="image/webp"
+      />
+      <img
+        src="/images/hero-ink-coast.png"
+        alt=""
+        width="1672"
+        height="941"
+        fetchpriority="high"
+        class="h-full w-full object-cover object-top sm:object-center"
+      />
+    </picture>
   </div>
 
   {/* Velo lateral: conserva la zona de lectura del titular sobre la ilustración. */}
