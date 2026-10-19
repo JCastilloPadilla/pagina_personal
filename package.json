@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev:lab": "astro dev --config astro.dev.config.mjs",
+    "build:dev": "astro build --config astro.dev.config.mjs",
+    "preview:lab": "astro preview --config astro.dev.config.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

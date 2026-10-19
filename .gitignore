@@ -1,5 +1,7 @@
 node_modules/
 dist/
+dist-dev/
+.taste-skill/
 .astro/
 .env
 .env.production

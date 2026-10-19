@@ -1,6 +1,25 @@
-# ccastillo.me
+# ccastillo.me + ccastillo.dev
 
 Sitio personal de Jose Carlos Castillo Padilla.
+
+El repositorio contiene dos sitios independientes. El portafolio sigue en
+`src/` y se compila en `dist/`. El laboratorio editorial de **ccastillo.dev**
+vive en `lab/` y se compila en `dist-dev/`.
+
+| Sitio | Desarrollo | Compilación | Salida |
+| --- | --- | --- | --- |
+| ccastillo.me | `npm run dev` (4321) | `npm run build` | `dist/` |
+| ccastillo.dev | `npm run dev:lab` (4322) | `npm run build:dev` | `dist-dev/` |
+
+Para revisar la salida del laboratorio: `npm run preview:lab`.
+Sus textos y proyectos están en `lab/src/pages/index.astro`, los estilos en
+`lab/src/styles/lab.css` y la galería en `lab/src/scripts/gallery.ts`.
+Reutiliza las capturas reales de FlowTrix desde el portafolio; Astro las copia
+con nombres versionados en `dist-dev/_lab/`. No requiere servicios externos,
+base de datos ni un proceso Node en producción.
+
+El despliegue del laboratorio se documenta en
+[infra/ccastillo.dev/README.md](infra/ccastillo.dev/README.md).
 
 **Stack:** Astro 7 (estático) · Tailwind 4 · React (islas) · three.js · Paper Shaders · PHP 8 + MySQL (pendiente)
 
