@@ -68,3 +68,21 @@ Publicado el 18 de octubre de 2026 (hora de Mazatlán). Índice y todos los recu
 SHA-256 del índice publicado idéntico al build: `b55b37a14f9aca8f7dccc22d91a39cb52b440761f7f4988667c4fb105381a4a3`.
 
 SHA-256 del índice de ccastillo.me antes/después idéntico: `b2d780cd155bfe38e02e0f441529ccf9f65448b50302bebc0384218be03140f6`.
+
+## Revisión: seguir el diseño de ccastillo.me
+
+El usuario rechaza la dirección serif/marfil y solicita seguir la línea visual del portafolio. Se actualiza la especificación y se implementa directamente esa corrección sobre la landing existente.
+
+- [x] Compartir estilos globales, fuentes Archivo/Plex, paleta fría, navegación entre corchetes y filetes de ccastillo.me.
+- [x] Portada costera de redes con el titular «Laboratorio de desarrollo.», manteniendo proyectos y enlaces reales.
+- [x] Reutilizar UtilityRule y FooterGarden sin modificar los originales; cierre azul de la misma familia.
+- [x] Optimizar portada: PNG original 2464 kB → WebP de 247 kB.
+- [x] Revisar capturas de escritorio, tableta y móvil, corregir tamaños, reducir espacios sobrantes y mejorar cuerpo de lectura a 16–17 px.
+- [x] Build y diagnósticos Astro correctos, 5 pruebas existentes pasando; smoke local a 320/390/768/1440 sin overflow, galería y fallback sin JS correctos.
+- [x] Publicar manteniendo webroot, permisos y configuración HTTPS; verificar todos los recursos.
+
+Inspector: 0 FAIL con excepciones de marca explícitas. El sistema visual solicitado usa monospace, etiquetas de 11 px, índices, filetes, firma con degradado, tres fuentes y halo de legibilidad en el nombre del header; estas decisiones del usuario tienen prioridad sobre las prohibiciones genéricas de la guía. La cuota de imágenes excluye miniaturas pequeñas: se conservan las capturas reales y la ilustración propia en vez de agregar stock. Avisos de las escalas tipográficas y navegación translúcida aceptados como parte del sistema de marca; el párrafo destacado de tableta se redujo de 30 a 24 px y el texto de proyectos secundarios se subió de 15 a 16 px después de la última medición. Contraste de texto secundario 5.3:1, conforme AA. No existe video propio pertinente.
+
+Crítica visual final: diseño 8.5, usabilidad 8.5, creatividad 8, contenido 8; ponderado 8.35/10. El logro principal es continuidad real con el portafolio: misma tipografía, paleta, retícula, componentes ilustrados y remate. Se preserva el foco de laboratorio mediante el título, la ilustración de enlaces de red y los proyectos con sus estados.
+
+Publicado con respaldo de la versión previa en `/var/backups/ccastillo.dev/20261019T001222Z/`. SHA-256 del nuevo índice: `242a2da8031795d02d0c7ad40420eef559a672ed8101b5ff34daddaf0b18d6c5`. El índice público coincide con la compilación; fuentes, imágenes, CSS y favicon devuelven 200, HTTP redirige 301 a HTTPS y www responde 200. Hash del portafolio intacto: `b2d780cd155bfe38e02e0f441529ccf9f65448b50302bebc0384218be03140f6`.

@@ -1,5 +1,19 @@
 # ccastillo.dev — laboratorio abierto
 
+> **Dirección actual, revisión del 18 de octubre de 2026:** el usuario solicita rediseñar lo construido siguiendo la línea de ccastillo.me. Esto sustituye la dirección de color y tipografía inicial descrita abajo. Se conservan alcance, proyectos y autorización de publicación.
+
+## Sistema visual compartido (vigente)
+
+- Importar el sistema de estilos y las fuentes reales del portafolio: Archivo Variable con ancho 116%, IBM Plex Sans e IBM Plex Mono. Papel frío #EDF1F7, tinta #0D1526, azul #2F6BFF y verde de estado #12B76A.
+- Seguir su navegación fija entre corchetes, etiquetas técnicas, márgenes de 1180px, retícula con filetes, índices de sección y botones de 3px.
+- Portada ilustrada con el recurso existente hero-coastal-network: costa, tinta azul, enlaces de red y sol naranja. Optimizar como WebP en build. Titular «Laboratorio de desarrollo.»
+- Composición de FlowTrix en dos columnas, proyectos secundarios en filas, contenido abierto sobre el mismo papel y cierre azul con palmeras.
+- Reutilizar directamente UtilityRule y FooterGarden del portafolio; no duplicar ni modificar los originales.
+- La instrucción de seguir la marca existente prevalece sobre las prohibiciones genéricas del skill de diseño para mono, etiquetas, líneas, numeración, degradado de firma y tercera fuente. No agregar fotografías o video ajenos para llenar cuotas: la evidencia son las capturas reales y la ilustración propia.
+- Implementación directa de esta corrección visual; verificar y actualizar la publicación existente usando la autorización de despliegue de esta conversación.
+
+## Primera dirección (histórica, sustituida)
+
 Dirección aprobada por el usuario el 18 de octubre de 2026: cuaderno editorial de desarrollo, fondo marfil, tinta oscura, naranja, composición asimétrica, titulares grandes. Apertura: «Ideas que terminan en código.» Proyectos reales con enlaces y estado honesto; espacio para trabajo en proceso; GitHub y portafolio personal al cierre. El usuario autoriza implementar en el mismo repositorio y publicar en la VPS en el espacio de ccastillo.dev.
 
 ## Decisiones de implementación

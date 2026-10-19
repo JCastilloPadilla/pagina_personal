@@ -18,6 +18,11 @@ Reutiliza las capturas reales de FlowTrix desde el portafolio; Astro las copia
 con nombres versionados en `dist-dev/_lab/`. No requiere servicios externos,
 base de datos ni un proceso Node en producción.
 
+El laboratorio sigue el sistema visual de `ccastillo.me`: importa sus estilos
+globales, Archivo e IBM Plex, y reutiliza los componentes `UtilityRule` y
+`FooterGarden`. La ilustración costera de redes se optimiza a WebP durante el
+build. Los ajustes propios de composición quedan en `lab/src/styles/lab.css`.
+
 El despliegue del laboratorio se documenta en
 [infra/ccastillo.dev/README.md](infra/ccastillo.dev/README.md).
 
