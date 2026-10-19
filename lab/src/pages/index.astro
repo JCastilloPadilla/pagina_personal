@@ -7,7 +7,7 @@ import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '../../../src/styles/global.css';
 import '../styles/lab.css';
-import coast from '../../../public/images/hero-coastal-network.png';
+import workshop from '../assets/hero-prototype-workshop.png';
 import UtilityRule from '../../../src/components/UtilityRule.astro';
 import FooterGarden from '../../../src/components/FooterGarden.astro';
 import overview from '../../../public/images/flowtrix/flowtrix-overview.png';
@@ -51,7 +51,7 @@ const year = new Date().getFullYear();
 
     <main id="contenido">
       <section class="hero" aria-labelledby="hero-title">
-        <Image class="hero-art" src={coast} alt="" format="webp" quality={85} loading="eager" fetchpriority="high" aria-hidden="true" />
+        <Image class="hero-art" src={workshop} alt="" format="webp" quality={85} loading="eager" fetchpriority="high" aria-hidden="true" />
         <div class="hero-inner wrap">
         <p class="hero-location">Jose Castillo · Mazatlán, México</p>
         <h1 id="hero-title"><span class="line"><span>Laboratorio</span></span><span class="line"><span>de desarrollo.</span></span></h1>

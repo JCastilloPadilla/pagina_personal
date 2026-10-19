@@ -6,7 +6,7 @@
 
 - Importar el sistema de estilos y las fuentes reales del portafolio: Archivo Variable con ancho 116%, IBM Plex Sans e IBM Plex Mono. Papel frío #EDF1F7, tinta #0D1526, azul #2F6BFF y verde de estado #12B76A.
 - Seguir su navegación fija entre corchetes, etiquetas técnicas, márgenes de 1180px, retícula con filetes, índices de sección y botones de 3px.
-- Portada ilustrada con el recurso existente hero-coastal-network: costa, tinta azul, enlaces de red y sol naranja. Optimizar como WebP en build. Titular «Laboratorio de desarrollo.»
+- Portada actual: «Taller de prototipos», tercera opción generada con ImageGen y elegida por el usuario; original en `lab/src/assets/hero-prototype-workshop.png`, prompt y procedencia junto al archivo. Sustituye la ilustración costera anterior. WebP calidad 85 en build (~411 kB). Escritorio: taller a la derecha con velo para legibilidad; móvil y tableta: dibujo en la parte inferior. Titular «Laboratorio de desarrollo.»
 - Composición de FlowTrix en dos columnas, proyectos secundarios en filas, contenido abierto sobre el mismo papel y cierre azul con palmeras.
 - Reutilizar directamente UtilityRule y FooterGarden del portafolio; no duplicar ni modificar los originales.
 - La instrucción de seguir la marca existente prevalece sobre las prohibiciones genéricas del skill de diseño para mono, etiquetas, líneas, numeración, degradado de firma y tercera fuente. No agregar fotografías o video ajenos para llenar cuotas: la evidencia son las capturas reales y la ilustración propia.

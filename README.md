@@ -20,8 +20,11 @@ base de datos ni un proceso Node en producción.
 
 El laboratorio sigue el sistema visual de `ccastillo.me`: importa sus estilos
 globales, Archivo e IBM Plex, y reutiliza los componentes `UtilityRule` y
-`FooterGarden`. La ilustración costera de redes se optimiza a WebP durante el
-build. Los ajustes propios de composición quedan en `lab/src/styles/lab.css`.
+`FooterGarden`. La portada usa la ilustración «Taller de prototipos», elegida
+por el usuario, guardada en `lab/src/assets/hero-prototype-workshop.png` y
+optimizada a WebP durante el build. Su prompt y procedencia están en el archivo
+Markdown junto a la imagen. Los ajustes propios de composición quedan en
+`lab/src/styles/lab.css`.
 
 El despliegue del laboratorio se documenta en
 [infra/ccastillo.dev/README.md](infra/ccastillo.dev/README.md).

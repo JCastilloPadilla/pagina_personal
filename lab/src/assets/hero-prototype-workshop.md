@@ -1,0 +1,14 @@
+# Taller de prototipos — portada de ccastillo.dev
+
+Imagen generada con la herramienta integrada ImageGen el 18 de octubre de 2026.
+Opción 3 elegida expresamente por el usuario. Original conservado sin edición
+en `hero-prototype-workshop.png`; Astro genera WebP calidad 85 (~411 kB).
+En escritorio el taller ocupa el lado derecho; a 1000 px o menos se encuadra
+en la parte inferior para mantener libre el texto. Los velos de legibilidad
+se aplican en CSS y no alteran el original.
+
+## Prompt final
+
+Create a finished wide panoramic 2:1 editorial illustration for the hero background of ccastillo.dev, the personal online software development laboratory of Jose Castillo, whose projects involve web applications, networking, monitoring agents and automation. Visual family: exceptionally crafted blue ink engraving on pale cold blue-gray paper (#EDF1F7), dark navy (#0D1526) crosshatching, sparse cobalt blue (#2F6BFF) details and at most a tiny orange cable or indicator. Hand-drawn pen and etched stipple, tactile quiet paper grain, highly intentional editorial composition, sophisticated and personal, not corporate clip art. This is a standalone background asset, not a webpage mockup. Leave the upper left 55 percent and left middle as calm very pale paper with only the faintest texture, completely available for dark HTML headline and supporting copy. Concentrate detailed drawing on the right half and along the bottom edge, blending naturally into the paper; coherent perspective and convincing objects. All important objects should remain identifiable in a narrower crop of the right portion. No text, no lettering, no labels, no logos, no typography, no watermark. No coast, landscape, sunset, palm trees, chemistry equipment, science-fiction neon, gradients, holograms or generic floating abstract blobs. The subject must unmistakably communicate building and testing software, not an IT repair shop.
+
+Subject: a small, inviting personal software prototyping studio seen in a wide frontal three-quarter architectural cutaway. The studio occupies the right half and lower edge. A long simple worktable supports two open laptops at different stages of development, a compact monitor with a hand-drawn connected-node network test, a small rack containing two modest servers, an open notebook of interface sketches and a couple of plug-in cables. On a small wall pinboard above the right end are three pinned paper interface studies with only graphic boxes and lines. One chair slightly pulled out implies a person has just been building here; no people. Make the scene feel like a genuine creative coding workshop full of works in progress rather than a computer store or a laboratory for physical science. Richly etched cabinetry and quiet shadows made with crosshatching, ample airy negative space above and on the left. A clear continuous spatial scene, no card layout or separate icon collection.
