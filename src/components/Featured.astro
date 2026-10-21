@@ -3,6 +3,7 @@ import { featured } from '../data/site';
 import MedalHook from './MedalHook.astro';
 import NetworkTopology from './NetworkTopology.astro';
 import SectionHeading from './SectionHeading.astro';
+import MagneticLink from './MagneticLink';
 ---
 
 {/* Sin bloque de color ni textura propia: FlowTrix pesa por tamaño y por aire.
@@ -45,14 +46,15 @@ import SectionHeading from './SectionHeading.astro';
         <div class="mt-9 flex flex-wrap gap-3">
           {
             featured.links.map((link) => (
-              <a
+              <MagneticLink
+                client:load
                 href={link.href}
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                class:list={['u-btn', link.variant === 'solid' ? 'u-btn-solid' : 'u-btn-line']}
+                className={`u-btn ${link.variant === 'solid' ? 'u-btn-solid' : 'u-btn-line'}`}
               >
                 {link.label}
-              </a>
+              </MagneticLink>
             ))
           }
         </div>

@@ -1,10 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://ccastillo.me',
   output: 'static',
+  integrations: [react()],
 
   // `dist/` es el DocumentRoot que sirve Apache (Laragon).
   // Todo lo que viva en `public/` se copia tal cual ahí dentro,
