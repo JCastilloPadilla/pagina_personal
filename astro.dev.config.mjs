@@ -1,6 +1,7 @@
 // Independiente de ccastillo.me: nunca desplegar dist/ en el dominio .dev.
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://ccastillo.dev',
@@ -9,6 +10,7 @@ export default defineConfig({
   outDir: './dist-dev',
   cacheDir: './node_modules/.astro-lab',
   output: 'static',
+  integrations: [react()],
   build: { assets: '_lab' },
   server: { port: 4322, host: '127.0.0.1' },
   vite: { plugins: [tailwindcss()] },

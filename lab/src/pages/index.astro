@@ -7,18 +7,12 @@ import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '../../../src/styles/global.css';
 import '../styles/lab.css';
-import workshop from '../assets/hero-prototype-workshop.png';
-import UtilityRule from '../../../src/components/UtilityRule.astro';
-import FooterGarden from '../../../src/components/FooterGarden.astro';
-import overview from '../../../public/images/flowtrix/flowtrix-overview.png';
-import alerts from '../../../public/images/flowtrix/flowtrix-alerts.png';
-import agent from '../../../public/images/flowtrix/flowtrix-windows-agent.png';
+import workshop from '../assets/hero-workshop-cloud-edge-v4.png';
+import footerCoast from '../assets/footer-coast-cloud-edge-v3.png';
+import { HeroTitle, MagneticLink, LaboratoryLabel } from '../components/LabMotion';
+import ProjectSections from '../components/ProjectSections.astro';
+import { LabGridBackground } from '../components/LabEffects';
 
-const views = [
-  { image: overview, name: 'Vista general', alt: 'Dashboard real de FlowTrix con actividad y estado de la red', note: 'La red, desde un solo lugar.' },
-  { image: alerts, name: 'Alertas', alt: 'Panel real de alertas de FlowTrix', note: 'Encontrar lo que necesita atención.' },
-  { image: agent, name: 'Agente Windows', alt: 'Aplicación real del agente Windows de FlowTrix', note: 'La información empieza en cada equipo.' },
-];
 const year = new Date().getFullYear();
 ---
 
@@ -53,94 +47,53 @@ const year = new Date().getFullYear();
       <section class="hero" aria-labelledby="hero-title">
         <Image class="hero-art" src={workshop} alt="" format="webp" quality={85} loading="eager" fetchpriority="high" aria-hidden="true" />
         <div class="hero-inner wrap">
+        <div class="hero-text">
         <p class="hero-location">Jose Castillo · Mazatlán, México</p>
-        <h1 id="hero-title"><span class="line"><span>Laboratorio</span></span><span class="line"><span>de desarrollo.</span></span></h1>
+        <HeroTitle client:load />
         <div class="hero-bottom">
           <div class="hero-copy">
             <p>Ideas que terminan en código. Proyectos web, redes y pequeñas herramientas que construyo para aprender y resolver cosas.</p>
           </div>
-          <div class="hero-actions"><a class="button" href="#proyectos">Explorar proyectos <span aria-hidden="true">→</span></a><a class="button button-outline" href="https://github.com/JCastilloPadilla">Ver el código <span aria-hidden="true">↗</span></a></div>
+          <div class="hero-actions"><MagneticLink client:load className="button" href="#proyectos">Explorar proyectos <span aria-hidden="true">→</span></MagneticLink><MagneticLink client:load className="button button-outline" href="https://github.com/JCastilloPadilla">Ver el código <span aria-hidden="true">↗</span></MagneticLink></div>
         </div>
         </div>
-      </section>
-      <div class="status-strip"><div class="wrap"><p><span class="status-dot" aria-hidden="true"></span> Laboratorio personal</p><p>Web · Redes · Automatización</p><a href="https://ccastillo.me/">Mi portafolio personal ↗</a></div></div>
-
-      <section id="proyectos" class="projects" aria-labelledby="projects-title">
-        <div class="wrap">
-          <div class="section-heading reveal"><h2 id="projects-title">Proyectos del laboratorio</h2><span>01 / 03</span></div>
-
-          <article class="featured" aria-labelledby="flow-title">
-            <div class="feature-copy reveal">
-              <div>
-                <p class="project-label"><span class="status-dot" aria-hidden="true"></span> Proyecto en línea</p>
-                <h3 id="flow-title">FlowTrix</h3>
-                <p class="feature-statement">Entender qué pasa<br />en la red.</p>
-              </div>
-              <div class="feature-description">
-                <p>Un dashboard web y un agente en cada equipo. Telemetría, alertas e históricos para tener visibilidad de punta a punta.</p>
-                <p class="project-meta">Monitoreo de redes · Dashboard + agente</p>
-                <a class="text-link" href="https://flowtrix.fimaz.uas.edu.mx/">Abrir FlowTrix <span aria-hidden="true">↗</span></a>
-              </div>
-            </div>
-
-            <div class="project-evidence reveal" data-gallery>
-              <figure class="main-view">
-                <div class="image-stage"><img id="gallery-main" src={overview.src} width={overview.width} height={overview.height} alt={views[0].alt} loading="lazy" decoding="async" /></div>
-                <figcaption><span data-gallery-caption>{views[0].note}</span><span>Capturas del proyecto</span></figcaption>
-              </figure>
-              <div class="gallery-views" aria-label="Vistas de FlowTrix">
-                {views.map((view, index) => (
-                  <a class="view-option" href={view.image.src} data-view data-caption={view.note} aria-current={index === 0 ? 'true' : undefined} aria-label={`Ver captura: ${view.name}`}>
-                    <span class="thumbnail"><img src={view.image.src} width={view.image.width} height={view.image.height} alt={view.alt} loading="lazy" decoding="async" /></span>
-                    <span>{view.name}<span aria-hidden="true">↗</span></span>
-                  </a>
-                ))}
-              </div>
-              <p class="sr-only" data-gallery-status role="status" aria-live="polite"></p>
-            </div>
-          </article>
-
-          <div class="work-index">
-            <article class="work-entry reveal">
-              <div class="work-title"><h3>Generador de QR</h3><span>Código abierto</span></div>
-              <p>De un enlace a un código listo para descargar. Una herramienta web para resolver una tarea concreta, sin complicarla.</p>
-              <a class="text-link" href="https://github.com/JCastilloPadilla/generador-de-QR">Ver repositorio <span aria-hidden="true">↗</span></a>
-            </article>
-            <article class="work-entry reveal">
-              <div class="work-title"><h3>Automatizaciones</h3><span>Uso interno</span></div>
-              <p>Scripts para respaldos, reportes y revisiones de equipos en lote. Pequeñas piezas que me devuelven tiempo.</p>
-              <p class="work-note">Python · Herramientas de uso propio</p>
-            </article>
-          </div>
         </div>
       </section>
-      <div class="shared-rule"><UtilityRule /></div>
-      <section id="laboratorio" class="about wrap" aria-labelledby="about-title">
-        <div class="section-heading reveal"><h2 id="about-title">El laboratorio</h2><span>02 / 03</span></div>
-        <div class="about-columns">
-        <div class="about-title reveal"><h3>Probar para<br />entender.</h3><p>Un espacio personal.<br />Con la puerta abierta.</p></div>
-        <div class="about-body">
-          <p class="about-statement reveal">Construyo cosas para entender cómo funcionan. A veces es una red; otras, una tarea que ya me cansé de hacer a mano.</p>
-          <p class="reveal">Este es el lugar donde esas ideas toman forma: herramientas que uso, pruebas que me enseñan algo y proyectos que vale la pena compartir. El código cambia. La curiosidad se queda.</p>
-          <dl class="facts reveal"><div><dt>En la mesa</dt><dd>Web, redes y automatización</dd></div><div><dt>En la caja de herramientas</dt><dd>JavaScript, PHP, Python, Git y Linux</dd></div><div><dt>Al otro lado del teclado</dt><dd>Jose Castillo · Mazatlán, Sinaloa</dd></div></dl>
-          <a class="text-link reveal" href="https://ccastillo.me/">Más sobre mí en ccastillo.me <span aria-hidden="true">↗</span></a>
-        </div>
+      <div class="status-strip"><div class="wrap"><p><span class="status-dot" aria-hidden="true"></span> <LaboratoryLabel client:visible /></p><p>Web · Redes · Automatización</p><a href="https://ccastillo.me/">Mi portafolio personal ↗</a></div></div>
+
+      <ProjectSections />
+      <section id="laboratorio" class="about" aria-labelledby="about-title">
+        <LabGridBackground client:visible />
+        <div class="about-content wrap">
+        <div class="section-heading reveal"><h2 id="about-title">El laboratorio</h2><span>Entorno de pruebas</span></div>
+        <p class="about-summary">Un sitio para pruebas de todo tipo: desarrollo web, bases de datos, APIs, integraciones y automatizaciones.</p>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="wrap">
-        <div class="section-heading reveal"><h2>Contacto y código</h2><span>03 / 03</span></div>
-        <div class="footer-top reveal"><p>¿Una idea, un error que encontraste<br />o algo que quieras construir?</p><a href="#contenido">Volver arriba <span aria-hidden="true">↑</span></a></div>
-        <p class="footer-title reveal">Sigamos construyendo.</p>
-        <div class="footer-contact reveal"><a class="button button-light" href="mailto:joosec29@gmail.com">Escríbeme <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/JCastilloPadilla">Sigue el código en GitHub <span aria-hidden="true">↗</span></a></div>
-        <div class="footer-notes"><p>Hecho en Mazatlán, Sinaloa</p><span>© {year} Jose Castillo</span></div>
-        <div class="footer-signature"><div class="footer-garden"><FooterGarden /></div><div class="footer-panel"><div class="footer-links"><a href="https://ccastillo.me/">Portafolio personal ↗</a><a href="https://github.com/JCastilloPadilla">GitHub ↗</a><a href="#contenido">Volver arriba ↑</a></div><p aria-label="ccastillo.dev">ccastillo.dev</p></div></div>
+    <footer id="contacto" class="footer" aria-labelledby="footer-title">
+      <Image class="footer-art" src={footerCoast} alt="" format="webp" quality={85} loading="lazy" aria-hidden="true" />
+      <div class="footer-content wrap">
+        <div class="footer-header">
+          <a class="footer-brand" href="/">ccastillo<span>.dev</span></a>
+          <a class="footer-up" href="#contenido">Volver arriba <span aria-hidden="true">↑</span></a>
+        </div>
+        <div class="footer-grid">
+          <div class="footer-main">
+            <h2 id="footer-title">Seguimos<br />construyendo.</h2>
+            <p class="footer-intro">¿Una idea, una pregunta o algo que quieras construir? Las buenas conversaciones también empiezan proyectos.</p>
+            <a class="footer-email" href="mailto:joosec29@gmail.com">Hablemos <span aria-hidden="true">↗</span></a>
+            <nav class="footer-nav" aria-label="Enlaces del footer">
+              <div><h3>Explorar</h3><a href="#proyectos">Proyectos</a><a href="#laboratorio">El laboratorio</a><a href="https://ccastillo.me/">Portafolio <span aria-hidden="true">↗</span></a></div>
+              <div><h3>Conectar</h3><a href="https://github.com/JCastilloPadilla">GitHub <span aria-hidden="true">↗</span></a><a href="mailto:joosec29@gmail.com">Correo <span aria-hidden="true">↗</span></a></div>
+            </nav>
+            <div class="footer-fineprint"><p>Desde Mazatlán, México.</p><span>© {year} Jose Castillo</span></div>
+          </div>
+        </div>
       </div>
     </footer>
     <script>
-      import '../scripts/gallery';
+      import '../scripts/reveal';
     </script>
   </body>
 </html>

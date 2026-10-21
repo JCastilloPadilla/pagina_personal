@@ -12,18 +12,49 @@ vive en `lab/` y se compila en `dist-dev/`.
 | ccastillo.dev | `npm run dev:lab` (4322) | `npm run build:dev` | `dist-dev/` |
 
 Para revisar la salida del laboratorio: `npm run preview:lab`.
-Sus textos y proyectos están en `lab/src/pages/index.astro`, los estilos en
-`lab/src/styles/lab.css` y la galería en `lab/src/scripts/gallery.ts`.
-Reutiliza las capturas reales de FlowTrix desde el portafolio; Astro las copia
+El laboratorio habilita React únicamente en `astro.dev.config.mjs` e integra
+SplitText en el titular, Magnet en los botones, AnimatedContent en los proyectos
+y DecryptedText en la etiqueta del laboratorio. Las nuevas secciones usan
+PixelTransition para revelar un QR escaneable y SpotlightCard en Remira.
+Automatizaciones cierra los proyectos después de FlowTrix con un bloque breve
+de texto sobre scripts de uso propio, sin banda animada ni controles interactivos.
+El contenido se renderiza en servidor y los efectos respetan movimiento reducido.
+La entrada a los proyectos usa SplitFlapText: «Siempre hay algo» con un tablero
+que alterna «EN DESARROLLO», «EN PRUEBAS» y «EN LÍNEA», sin botón de pausa y con
+cambios cada tres segundos mientras está visible.
+El símbolo del título QR usa MetallicPaint en plata/grafito y el fondo de
+«El laboratorio» usa CursorGrid tenue, implementados en `LabEffects.tsx`.
+Son decorativos: el contenido sigue visible sin WebGL o JavaScript y el
+movimiento reducido conserva una presentación estática.
+Código y licencia: `lab/src/components/react-bits/`.
+La portada y el footer están en `lab/src/pages/index.astro`. Las secciones están
+en `lab/src/components/ProjectSections.astro`; sus galerías y controles React,
+en `ProjectShowcase.tsx`. Los estilos propios están en `lab/src/styles/`.
+Las capturas reales de QR y Remira están en `lab/src/assets/projects/`, con una
+nota de procedencia. Remira muestra su captura principal. QR utiliza un esquema
+vectorial propio (`QRBlueprint.tsx`), con entradas de enlace, WiFi y contacto,
+conexiones animadas y un código escaneable en SVG, sin captura de pantalla.
+FlowTrix tiene una sección propia sin imágenes del dashboard: `FlowNetwork.tsx`
+representa equipos, agente, alertas e históricos con nodos seleccionables y
+conexiones animadas. Es un esquema ilustrativo sin monitoreo en vivo.
+Remira está marcado «En construcción»; sus respuestas aún
+son simuladas. Astro copia las imágenes optimizadas
 con nombres versionados en `dist-dev/_lab/`. No requiere servicios externos,
 base de datos ni un proceso Node en producción.
 
 El laboratorio sigue el sistema visual de `ccastillo.me`: importa sus estilos
-globales, Archivo e IBM Plex, y reutiliza los componentes `UtilityRule` y
-`FooterGarden`. La portada usa la ilustración «Taller de prototipos», elegida
-por el usuario, guardada en `lab/src/assets/hero-prototype-workshop.png` y
-optimizada a WebP durante el build. Su prompt y procedencia están en el archivo
-Markdown junto a la imagen. Los ajustes propios de composición quedan en
+globales, Archivo e IBM Plex. El separador de postes y luces se retiró del laboratorio.
+El footer local usa una costa editorial a todo el ancho: tinta azul, papel frío
+y sombras punteadas, con texto oscuro sobre mar claro. Fuente actual:
+`lab/src/assets/footer-coast-cloud-edge-v3.png`. La portada usa la ilustración «Taller de prototipos», elegida
+por el usuario. La revisión local usa `lab/src/assets/hero-workshop-cloud-edge-v4.png`,
+una escena de lado a lado con escritorio continuo abajo y pared despejada para el
+texto. Es un fondo a todo el ancho, sin columnas, velos ni filtros.
+Ambas imágenes incorporan un remate irregular de nube/punteado con transparencia
+real: abajo en la portada y arriba en el footer, para integrarse con el fondo.
+El encuadre conserva esos bordes. Se optimizan a WebP manteniendo alfa durante el build.
+Los prompts y la procedencia de esta edición están en `lab/src/assets/cloud-edges.md`.
+Los ajustes propios de composición quedan en
 `lab/src/styles/lab.css`.
 
 El despliegue del laboratorio se documenta en

@@ -1,0 +1,80 @@
+---
+import { getImage } from 'astro:assets';
+import { QRShowcase, RemiraPreview } from './ProjectShowcase';
+import AnimatedContent from './react-bits/AnimatedContent';
+import { MagneticLink } from './LabMotion';
+import FlowNetwork from './FlowNetwork';
+import ProjectStatus from './ProjectStatus';
+import { MetallicQRMark } from './LabEffects';
+import qrCode from '../assets/projects/qr-scan.svg';
+import remira from '../assets/projects/remira-desktop.png';
+import '../styles/projects.css';
+
+const sources = [remira];
+const optimized = await Promise.all(sources.map(src => getImage({src, width:1440, format:'webp', quality:90})));
+const remiraShot = {src:optimized[0].src, label:'Remira', alt:'Portada real del prototipo de Remira, con su ilustración de correspondencia y el mensaje Antes de hacer clic, dale una segunda mirada'};
+---
+
+<section id="proyectos" class="projects" aria-labelledby="projects-title">
+  <div class="wrap">
+    <div class="section-heading reveal"><h2 id="projects-title">Proyectos del laboratorio</h2><span>En línea / En proceso</span></div>
+    <div class="project-opening">
+      <ProjectStatus client:visible />
+      <div class="project-opening-copy reveal"><p>Herramientas que ya puedes usar.<br />Experimentos que todavía están tomando forma.</p><nav aria-label="Ir a un proyecto"><a href="#qr">QR <span aria-hidden="true">↘</span></a><a href="#remira">Remira <span aria-hidden="true">↘</span></a><a href="#flowtrix">FlowTrix <span aria-hidden="true">↘</span></a><a href="#automatizaciones">Automatizaciones <span aria-hidden="true">↘</span></a></nav></div>
+    </div>
+  </div>
+
+  <section id="qr" class="qr-project" aria-labelledby="qr-title">
+    <div class="wrap">
+      <div class="project-chapter"><p><span class="status-dot" aria-hidden="true"></span> Herramienta en línea</p><a href="https://qr.ccastillo.dev/">qr.ccastillo.dev <span aria-hidden="true">↗</span></a></div>
+      <h3 id="qr-title" class="qr-title reveal">Generador <MetallicQRMark client:visible /> QR<span class="title-stop">.</span></h3>
+      <div class="qr-composition">
+        <div class="qr-copy">
+          <AnimatedContent client:load distance={32} duration={0.8} style={{visibility:'visible'}}>
+            <p class="project-statement">Una idea.<br />Un escaneo.</p>
+            <p class="project-description">Un enlace, el WiFi, tu contacto. Conviértelos en un QR a tu manera: cambia los módulos, las esquinas, los colores y hasta el logo.</p>
+            <MagneticLink client:load href="https://qr.ccastillo.dev/" className="button">Crear mi QR <span aria-hidden="true">↗</span></MagneticLink>
+            <div class="qr-output"><span class="qr-output-symbol" aria-hidden="true">↳</span><p>Estático. Sin caducidad.<br /><span>Descarga en PNG o SVG.</span></p></div>
+          </AnimatedContent>
+          <div class="qr-module-samples" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <AnimatedContent client:load distance={48} delay={0.1} duration={0.85} style={{visibility:'visible'}}>
+          <QRShowcase client:visible code={qrCode.src} />
+        </AnimatedContent>
+      </div>
+      <div class="qr-project-bottom"><p>Todo se genera en tu navegador.</p><a class="text-link" href="https://github.com/JCastilloPadilla/generador-de-QR">Explorar el código <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>
+
+  <section id="remira" class="remira-project wrap" aria-labelledby="remira-title">
+    <div class="remira-heading"><h3 id="remira-title" class="reveal">Remira<span class="title-stop">.</span></h3><p class="construction-status"><span aria-hidden="true">◒</span> En construcción</p></div>
+    <div class="remira-composition">
+      <AnimatedContent client:load distance={36} duration={0.8} style={{visibility:'visible'}}>
+        <RemiraPreview client:visible shot={remiraShot} />
+      </AnimatedContent>
+      <div class="remira-copy">
+        <svg class="remira-mail-symbol reveal" viewBox="0 0 100 80" fill="none" aria-hidden="true"><path d="M5 15h90v60H5z" stroke="currentColor" stroke-width="2" /><path d="m5 15 45 34 45-34M5 75l31-30m59 30L65 45" stroke="currentColor" stroke-width="2" /><circle cx="76" cy="20" r="18" fill="var(--paper)" stroke="var(--accent)" stroke-width="2" /><path d="m68 20 6 6 11-13" stroke="var(--accent)" stroke-width="2" /></svg>
+        <p class="project-statement reveal">Antes del clic,<br />otra mirada.</p>
+        <p class="project-description reveal">Un analizador de correos potencialmente maliciosos mediante inteligencia artificial. Nace en mi materia de Técnicas de Inteligencia Artificial, para explorar qué puede aprender un modelo del asunto y el contenido de un mensaje.</p>
+        <div class="remira-progress reveal"><h4>Sobre la mesa</h4><ul><li><span aria-hidden="true">↳</span> Interfaz navegable en React</li><li><span aria-hidden="true">↳</span> Evaluación preliminar del modelo local</li><li><span aria-hidden="true">◒</span> Conexión del analizador en desarrollo</li></ul></div>
+        <p class="remira-progress-note">Por ahora, la interfaz utiliza ejemplos y respuestas simuladas.</p>
+        <a class="text-link" href="https://github.com/JCastilloPadilla/email-threat-detector">Seguir el proyecto <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="remira-colophon"><span>Proyecto académico · Técnicas de IA</span><span>Texto → Modelo → Clasificación</span></div>
+  </section>
+
+  <section id="flowtrix" class="flow-project wrap" aria-labelledby="flow-title">
+    <div class="flow-heading">
+      <div><p class="project-chapter-label">Monitoreo de redes</p><h3 id="flow-title" class="reveal">FlowTrix<span class="title-stop">.</span></h3><p class="flow-statement reveal">Cada equipo tiene<br />algo que contar.</p></div>
+      <div class="flow-intro reveal"><p>De un agente en cada equipo a una vista de toda la red. Telemetría, alertas e históricos para entender qué está pasando y dónde mirar.</p><MagneticLink client:load href="https://flowtrix.fimaz.uas.edu.mx/" className="button">Explorar FlowTrix <span aria-hidden="true">↗</span></MagneticLink></div>
+    </div>
+    <FlowNetwork client:visible />
+  </section>
+  <section id="automatizaciones" class="automation-note" aria-labelledby="automation-title">
+    <div class="automation-note-inner wrap">
+      <div class="automation-note-heading"><span class="automation-script-mark" aria-hidden="true">›_</span><h3 id="automation-title">Automatizaciones</h3></div>
+      <div><p>Pequeños scripts para respaldos, reportes y revisiones de equipos en lote. Herramientas de uso propio para quitar pasos repetidos del día a día.</p><p class="automation-note-meta">Python · Scripts · Uso propio</p></div>
+    </div>
+  </section>
+</section>

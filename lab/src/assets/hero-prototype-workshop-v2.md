@@ -1,0 +1,19 @@
+# Taller de prototipos v2 — revisión local
+
+Generada y editada con ImageGen integrado. Composición en columnas independientes; el texto nunca se superpone a la ilustración. En móvil se apilan. No se usan overlays, filtros, máscaras ni degradados en el hero. `hero-prototype-workshop-v2.png` conserva la generación original; `hero-prototype-workshop-v2-cutout.png` es el recorte transparente usado por Astro, con alfa real y WebP calidad 85.
+
+No publicar en VPS hasta nueva instrucción expresa del usuario.
+
+## Prompt de generación
+
+Use case: illustration-story. Create a premium editorial ink illustration for the RIGHT-HAND illustration column of a personal software development laboratory website, ccastillo.dev. This is the corrected second version of a prototype workshop image. The webpage will have a separate text column to its left, so this illustration must be a clean, intentional standalone composition, NOT a full-screen wallpaper and NOT a website mockup.
+
+Format: portrait 4:5 illustration, with generous real empty pale paper in the upper left quarter and top margin. Background color is an even very pale cold blue-gray #EDF1F7, close to a solid clean sheet of paper. No lighting gradient across the paper. Do not wash out or fade any object. Keep linework crisp, dark navy #0D1526, with fine engraved hatching and subtle stipple. Restrained cobalt blue #2F6BFF accents, a single tiny orange cable end. Match the sophisticated blue ink engraving aesthetic of a personal editorial portfolio, not clip art.
+
+Subject: one modest developer's prototype workbench, viewed in convincing three-quarter perspective as an isolated studio vignette. A wooden desk occupies the lower half, with ONE open laptop showing orderly short graphic code strokes, ONE larger monitor behind it containing an abstract network diagram with connected cobalt nodes, ONE compact small server at far right with a few status lights, an open notebook of interface sketches, one pen and one blue coffee cup. One pulled-out simple chair tucked under the desk. A small hanging plant and two pinned wireframe sketches in the upper RIGHT corner complete the environment. Prioritize a clear, spacious composition with fewer objects over a crowded scene. No shelves, no books piled everywhere, no second desk, no extra laptops. All objects fully composed within the image with breathing room around them, avoid chopping off the monitor, laptop, or chair. The drawing must feel like a single atelier illustration on a page rather than a room photo filling the frame. Preserve the quiet paper margin as genuine empty space, NOT a white fog effect.
+
+Critical exclusions: absolutely NO white overlays, no haze, no fog, no transparency effect, no blur, no faded edges, no vignette, no gradient masks, no washed-out drawing. No text, no lettering, no labels, no logos, no watermark. No landscape, coast, sunset or palm trees. No chemistry lab, cyberpunk, neon glow, holograms, floating UI cards or generic abstract tech icons. Sharp consistent ink contrast over the whole drawing.
+
+## Prompt de eliminación del fondo
+
+Edit the referenced developer workbench illustration ONLY to remove its uniform very pale blue-gray paper background and replace that background with genuine transparent alpha. Preserve the composition, size, original navy engraved linework, cobalt details, desk, chair, monitor, laptop, notebook, plant, wireframe sheets and coffee cup. Do not redraw or rearrange the illustration. Preserve the pale interior fill colors of physical objects such as the notebook pages and monitor interface; remove only the surrounding background and background spaces between separate objects. Crisp clean detailed ink edges with real alpha outside the objects; no white fringe, haze, blur, glow, shadow, gradient, feathering or fade. The final asset is a transparent PNG cutout for a separate illustration column on a pale #EDF1F7 webpage. No extra objects or text.
